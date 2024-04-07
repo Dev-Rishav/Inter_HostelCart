@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('buildings.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333; 
+        }
+        
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            float: left;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #555;
+        }
+        
+        .login {
+            margin-top: 10px;
+            float: right;
+        }
+        
+        .login a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .login a:hover {
+            background-color: #45a049;
+        }
+        
+        .container {
+            padding: 20px;
+        }
+        
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .footer-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-icons a:hover {
+            color: #4CAF50;
+        }
+        
+        /* Styling for cards */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .card {
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Sell Item</a>
+        <a href="#">Buy Item</a>
+        <a href="#">Report Item</a>
+        <div class="login">
+            <a href="#">Login/Signup</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Welcome to Our Marketplace</h1>
+        <p>Inter-Hostel Cart is a visionary project aimed at creating a dynamic marketplace within university hostels, facilitating seamless transactions between students residing within the same accommodation. The platform serves as a centralized hub where hostel dwellers can buy and sell various products, fostering a sense of community and enhancing convenience for all users.</p>
+        <div class="card-container">
+            <div class="card">
+                <img src="card1.jpg" alt="Card Image 1">
+            </div>
+            <div class="card">
+                <img src="card2.jpg" alt="Card Image 2">
+            </div>
+            <div class="card">
+                <img src="card3.jpg" alt="Card Image 3">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-icons">
+            <a href="#"><img src="phone-icon.png" alt="Phone"></a>
+            <a href="#"><img src="email-icon.png" alt="Email"></a>
+            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+        </div>
+        <p>Contact us: +123456789 | Inter-Hostel@manit.ac.in</p>
+    </footer>
+</body>
+</html>

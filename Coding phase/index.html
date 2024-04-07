@@ -4,46 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketplace</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap">
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('buildings.jpg');
+            font-family: 'Source Sans Pro', sans-serif;
+            background-image: url('bg.jpg');
             background-size: cover;
             background-position: center;
-            color: #333; 
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.7);
         }
         
         nav {
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0); /* Transparent background */
             overflow: hidden;
+            text-align: center; /* Center align the navbar */
+            margin-top: 20px; /* Add top margin to shift navbar downward */
         }
         
         nav a {
             color: #fff;
-            text-decoration: none;
+            text-decoration:dashed;
             padding: 10px 20px;
-            float: left;
-            transition: background-color 0.3s;
+            justify-content: center;
+            transition: background-color 0.5s;
         }
         
         nav a:hover {
-            background-color: #555;
+            background-color: rgba(6, 231, 21, 0.7); /* Semi-transparent background on hover */
+            border-radius: 20px;
+            padding: 10px 20px;
+            text-decoration: dashed;
+            
         }
         
         .login {
             margin-top: 10px;
             float: right;
+            padding: 10px;
+            border-radius: 20px; /* Rounded corners */
         }
         
         .login a {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 20px; /* Rounded corners */
             text-decoration: none;
             transition: background-color 0.3s;
+            display: inline-block; /* Ensure it's inline-block for rounded corners */
         }
         
         .login a:hover {
@@ -55,10 +66,10 @@
         }
         
         footer {
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0);
             color: #fff;
             text-align: center;
-            padding: 20px 0;
+            padding: 7px 0;
             position: absolute;
             bottom: 0;
             width: 100%;
@@ -75,7 +86,6 @@
             color: #4CAF50;
         }
         
-        /* Styling for cards */
         .card-container {
             display: flex;
             justify-content: center;
@@ -87,7 +97,7 @@
         .card {
             width: 300px;
             height: 200px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             margin: 10px;
             border-radius: 10px;
             overflow: hidden;
@@ -134,11 +144,11 @@
     </div>
     <footer>
         <div class="footer-icons">
-            <a href="#"><img src="phone-icon.png" alt="Phone"></a>
-            <a href="#"><img src="email-icon.png" alt="Email"></a>
-            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+            <a href="#"><img src="phone-call.png" alt="Phone"></a>
+            <a href="#"><img src="email.png" alt="Email"></a>
+            <a href="#"><img src="facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="instagram (6).png" alt="Instagram"></a>
         </div>
         <p>Contact us: +123456789 | Inter-Hostel@manit.ac.in</p>
     </footer>

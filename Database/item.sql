@@ -22,5 +22,9 @@ INTO ITEM(itemNO,sellerID,itemName,itemPrice,itemDescription,itemTags,listingDat
 VALUES (09,224,'Havells Air Cooler',6000,'6months old, in very good condition, white in color','Cooler,Electronics',TO_DATE('02/03/24','MM/DD,YY'),0,9)
 SELECT * FROM dual;
 
-SELECT * from ITEM;
+
 desc item
+
+-- delete from item where SELLERID in (select userID from userTable where userID=219);
+-- ROLLBACK;
+SELECT * from ITEM;

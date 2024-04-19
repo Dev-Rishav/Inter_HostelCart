@@ -45,3 +45,6 @@ desc userTable;
 delete from USERTABLE where USERID=219;
 ROLLBACK;
 select * from USERTABLE;
+
+
+-- DELETE from USERTABLE where USERTABLE.USERID=219 CASCADE CONSTRAINTS;

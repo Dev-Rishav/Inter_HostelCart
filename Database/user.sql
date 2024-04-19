@@ -2,10 +2,10 @@
 
 CREATE TABLE userTable (
     userID NUMBER,
-    emailID varchar2(20) CONSTRAINT email_not_null_unique UNIQUE NOT NULL,
+    emailID varchar2(30) CONSTRAINT email_not_null_unique UNIQUE NOT NULL,
     hostelNo number CONSTRAINT hostel_not_null not null,
     roomNo number CONSTRAINT room_not_null not null,
-    userName varchar2(20) CONSTRAINT username_not_null not null,
+    userName varchar2(30) CONSTRAINT username_not_null not null,
     userDOB date CONSTRAINT dob_not_null not null,
     userPhoneNo number CONSTRAINT phone_not_null_unique UNIQUE NOT NULL,
     userPassword varchar2(16) CONSTRAINT password_not_null not null,
@@ -13,11 +13,14 @@ CREATE TABLE userTable (
     CONSTRAINT pk_user PRIMARY KEY (userID)
 );
 
+drop table userTable;
+
 ALTER TABLE userTable MODIFY userName
 VARCHAR2(30);
 
 ALTER TABLE userTable MODIFY emailID
 VARCHAR2(22);
+desc userTable;
 
 
  

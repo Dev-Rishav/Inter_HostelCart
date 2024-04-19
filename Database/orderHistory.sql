@@ -9,10 +9,11 @@ CREATE table orderHistory(
     CONSTRAINT fk_seller FOREIGN KEY (buyerID) REFERENCES userTable(userID),
     CONSTRAINT fk_seller FOREIGN KEY (itemNO) REFERENCES item(itemNO)
 );
+drop table orderHistory;
 
 INSERT ALL
 INTO orderHistory(buyerId,itemNO,sellerID,orderDate,status)
-VALUES (219,7,203,TO_DATE('2/3/24','mm/dd,yy'),'Done')
+VALUES (219,7,203,TO_DATE('2/3/24','mm/dd/yy'),'Done')
 SELECT * FROM dual;
 
 SELECT * from TAB;

@@ -1,5 +1,4 @@
 -- "user" can't be named as oracle DB has it in reserved words so name is "USERTABLE"
-
 CREATE TABLE userTable (
     userID NUMBER,
     emailID varchar2(30) CONSTRAINT email_not_null_unique UNIQUE NOT NULL,
@@ -13,8 +12,10 @@ CREATE TABLE userTable (
     CONSTRAINT pk_user PRIMARY KEY (userID)
 );
 
+
 drop table userTable;
 
+DROP TABLE USERTABLE;
 ALTER TABLE userTable MODIFY userName
 VARCHAR2(30);
 
@@ -51,3 +52,8 @@ select * from USERTABLE;
 
 
 -- DELETE from USERTABLE where USERTABLE.USERID=219 CASCADE CONSTRAINTS;
+SHOW CON_NAME;
+
+
+
+

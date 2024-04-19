@@ -11,11 +11,15 @@ CREATE TABLE userTable (
     CONSTRAINT pk_user PRIMARY KEY (userID)
 );
 
+
+drop table userTable;
+
 ALTER TABLE userTable MODIFY userName
 VARCHAR2(30);
 
 ALTER TABLE userTable MODIFY emailID
 VARCHAR2(22);
+desc userTable;
 
 
  
@@ -55,6 +59,7 @@ select * from dual;
 delete from USERTABLE where USERID=219;
 ROLLBACK;
 select * from USERTABLE;
+SHOW CON_NAME;
 
 
 -- DELETE from USERTABLE where USERTABLE.USERID=219 CASCADE CONSTRAINTS;

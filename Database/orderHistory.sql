@@ -17,4 +17,6 @@ VALUES (219,7,203,TO_DATE('2/3/24','mm/dd/yy'),'Done')
 SELECT * FROM dual;
 
 SELECT * from TAB;
+
 SELECT * from USERTABLE;
+

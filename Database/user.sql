@@ -1,11 +1,10 @@
 -- "user" can't be named as oracle DB has it in reserved words so name is "USERTABLE"
-
 CREATE TABLE userTable (
     userID NUMBER,
-    emailID varchar2(20) CONSTRAINT email_not_null_unique UNIQUE NOT NULL,
+    emailID varchar2(30) CONSTRAINT email_not_null_unique UNIQUE NOT NULL,
     hostelNo number CONSTRAINT hostel_not_null not null,
     roomNo number CONSTRAINT room_not_null not null,
-    userName varchar2(20) CONSTRAINT username_not_null not null,
+    userName varchar2(30) CONSTRAINT username_not_null not null,
     userDOB date CONSTRAINT dob_not_null not null,
     userPhoneNo number CONSTRAINT phone_not_null_unique UNIQUE NOT NULL,
     userPassword varchar2(16) CONSTRAINT password_not_null not null,
@@ -13,6 +12,7 @@ CREATE TABLE userTable (
     CONSTRAINT pk_user PRIMARY KEY (userID)
 );
 
+DROP TABLE USERTABLE;
 ALTER TABLE userTable MODIFY userName
 VARCHAR2(30);
 
@@ -45,3 +45,7 @@ desc userTable;
 delete from USERTABLE where USERID=219;
 ROLLBACK;
 select * from USERTABLE;
+SHOW CON_NAME;
+
+
+

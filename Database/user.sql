@@ -63,3 +63,32 @@ SHOW CON_NAME;
 
 
 -- DELETE from USERTABLE where USERTABLE.USERID=219 CASCADE CONSTRAINTS;
+
+
+
+-- Introducing PL/SQL to generate entries
+DECLARE
+    v_hostelNo NUMBER;
+    v_roomNo NUMBER;
+BEGIN
+    FOR i IN 1..30 LOOP
+        v_hostelNo := TRUNC(DBMS_RANDOM.VALUE(1, 12)); -- Random hostel number between 1 and 10
+        v_roomNo := TRUNC(DBMS_RANDOM.VALUE(1, 60)); -- Random room number between 100 and 999
+        
+        INSERT INTO userTable (userID, emailID, hostelNo, roomNo, userName, userDOB, userPhoneNo, userPassword)
+        VALUES (
+            i, -- Sequential userID
+            'user' || i || '@example.com', -- Unique emailID
+            v_hostelNo,
+            v_roomNo,
+            'User' || i, -- Unique userName
+            TO_DATE('2000-01-01', 'YYYY-MM-DD') + TRUNC(DBMS_RANDOM.VALUE(1, 365) * 18), -- Random userDOB between 18 years
+            TRUNC(DBMS_RANDOM.VALUE(1000000000, 9999999999)), -- Random userPhoneNo
+            'password' || i -- Unique userPassword
+        );
+    END LOOP;
+    COMMIT;
+END;
+/
+
+SELECT * from USERTABLE;

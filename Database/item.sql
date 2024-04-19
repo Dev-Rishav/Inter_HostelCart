@@ -79,3 +79,31 @@ INTO ITEM(itemNO,sellerID,itemName,itemPrice,itemDescription,itemTags,listingDat
 VALUES(06, 224, 'Coffee Mug Set', 120, 'Set of 4 ceramic mugs with different colors', 'kitchen home', TO_DATE('07/12/24','MM/DD/YY'), 0, 2)
 SELECT * FROM dual;
 SELECT * FROM ITEM;
+
+
+-- Introducing PL/SQL to generate entries
+DECLARE
+    v_sellerID NUMBER;
+BEGIN
+    FOR i IN 10..40 LOOP
+        v_sellerID := TRUNC(DBMS_RANDOM.VALUE(1, 30)); -- Random sellerID between 1 and 30
+
+        INSERT INTO item (itemNO, sellerID, itemName, itemPrice, itemDescription, itemTags, listingDate, reportflag, itemVisit)
+        VALUES (
+            i, -- Sequential itemNO
+            v_sellerID, -- Random sellerID
+            'Item' || i, -- Unique itemName
+            ROUND(DBMS_RANDOM.VALUE(10, 1000), 2), -- Random itemPrice between 10 and 1000
+            'Description for item ' || i, -- Description
+            'Tag' || i, -- Unique itemTags
+            SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), -- Random listingDate within the last year
+            CASE WHEN MOD(i, 2) = 0 THEN 1 ELSE 0 END, -- Alternating reportflag
+            TRUNC(DBMS_RANDOM.VALUE(0, 1000)) -- Random itemVisit
+        );
+    END LOOP;
+    COMMIT;
+END;
+/
+
+
+SELECT * from ITEM;

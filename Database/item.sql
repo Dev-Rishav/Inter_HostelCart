@@ -106,4 +106,9 @@ END;
 /
 
 
-SELECT * from ITEM;
+SELECT * from ITEM where sellerID=219;
+
+INSERT ALL
+INTO ITEM(itemNO,sellerID,itemName,itemPrice,itemDescription,itemTags,listingDate,reportflag,itemVisit) 
+VALUES(08, 7, 'Coffee Mug Set', 220, 'Set of 4 ceramic mugs with different colors', 'kitchen home', TO_DATE('07/12/24','MM/DD/YY'), 0, 2)
+select * from dual;

@@ -1,0 +1,16 @@
+CREATE TABLE soldHistory (
+    sellerID NUMBER,
+    ITEMNO NUMBER,
+    soldDate DATE CONSTRAINT soldDate_not_null NOT NULL,
+
+    CONSTRAINT fk_sh_userID FOREIGN KEY (sellerID) REFERENCES userTable(userID),
+    CONSTRAINT fk_sh_item FOREIGN KEY (ITEMNO) REFERENCES item(itemNO)
+);
+drop table soldHistory;
+
+INSERT all
+INTO SOLDHISTORY(SELLERID,ITEMNO,SOLDDATE) VALUES(219,7,TO_DATE('02/21/23','mm/dd,yy'))
+INTO SOLDHISTORY(SELLERID,ITEMNO,SOLDDATE) VALUES(219,7,TO_DATE('02/21/23','mm/dd,yy'))
+INTO SOLDHISTORY(SELLERID,ITEMNO,SOLDDATE) VALUES(219,7,TO_DATE('02/21/23','mm/dd,yy'))
+select * from dual;
+select * from soldHistory;

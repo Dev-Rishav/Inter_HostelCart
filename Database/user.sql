@@ -92,3 +92,6 @@ END;
 /
 
 SELECT * from USERTABLE;
+
+
+desc userTable;

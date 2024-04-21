@@ -35,10 +35,10 @@ VALUES(8,10,219,224,300,TO_DATE('14/02/24','DD/MM,YY'),1)
 INTO transaction( tranid,itemno,sellerid,buyerid,soldprice,solddate,itemstatus)
 VALUES(9,11,224,203,450,TO_DATE('28/11/23','DD/MM,YY'),1)
 INTO transaction( tranid,itemno,sellerid,buyerid,soldprice,solddate,itemstatus)
-VALUES(10,13,203,216,640,TO_DATE('17/05/23','DD/MM,YY'),1)
+VALUES(10,13,203,216,45000,TO_DATE('17/05/23','DD/MM,YY'),1)
 SELECT * FROM dual;
 
 SELECT *from transaction;
 
 
-select * from item;
+select * from ite;

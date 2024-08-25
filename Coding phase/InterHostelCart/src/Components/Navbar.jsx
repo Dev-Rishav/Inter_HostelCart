@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className="bg-cyan-950 shadow-md sticky  ">
       <div className=" px-4 flex items-center justify-start gap-3 h-12">
         <h1
-          className="text-lg text-gray-300 font-semibold cursor-pointer"
+          className="text-lg text-gray-200 font-semibold cursor-pointer"
           onClick={() => {}}
         >
           InterHostel Cart

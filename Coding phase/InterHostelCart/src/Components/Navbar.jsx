@@ -1,56 +1,50 @@
 import React from "react";
-import { TiThMenu } from "react-icons/ti";
-import { MdArrowDownward } from "react-icons/md";
-import { FaMagnifyingGlass } from "react-icons/fa6";
-import { AiOutlineUser } from "react-icons/ai";
-import { GiFountainPen } from "react-icons/gi";
-import { GoHeart } from "react-icons/go";
-import { BiGitCompare } from "react-icons/bi";
-import { TfiShoppingCart } from "react-icons/tfi";
-
+import { Search, ShoppingCart, Heart } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <nav className="bg-cyan-950 shadow-md sticky  ">
-      <div className=" px-4 flex items-center justify-start gap-3 h-12">
-        <h1
-          className="text-lg text-gray-200 font-semibold cursor-pointer"
-          onClick={() => {}}
-        >
-          InterHostel Cart
-        </h1>
-        <TiThMenu className="text-gray-300 text-2xl" />
-        {/* search box */}
-        <div className=" px-2 rounded-md h-8 w-3/5 bg-sky-700 text-gray-100 flex items-center ">
-          <button className=" w-1/12 flex gap-1/2 text-sm">
-            All
-            <MdArrowDownward className="pt-1" />
-          </button>
-          <input placeholder="Search Here..." className="border p-2 border-sky-700  bg-cyan-950 text-xs rounded-sm h-full w-full" />
-          <FaMagnifyingGlass className="w-1/12 text-gray-100" />
-        </div>
-        {/* user interaction */}
-        <div className="flex flex-row  text-gray-300 gap-3 items-center align-items">
-          <div className="flex flex-col items-center">
-            <AiOutlineUser className="text-[25px]" />
-            <h1 className="text-[12px]">Login</h1>
+    <nav className="bg-gray-100 text-gray-800 shadow-md fixed top-0 left-0 right-0 z-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          <div className="text-2xl font-bold cursor-pointer">InterHostel Cart</div>
+          <div className="hidden md:flex space-x-6">
+            <a href="#" className="hover:text-gray-600 transition-colors duration-200">
+              Home
+            </a>
+            <a href="#" className="hover:text-gray-600 transition-colors duration-200">
+              Shop
+            </a>
+            <a href="#" className="hover:text-gray-600 relative transition-colors duration-200">
+              Cart
+              <span className="absolute -top-3 -right-6 bg-yellow-500 text-white text-xs px-1 rounded">
+                HOT
+              </span>
+            </a>
+            <a href="#" className="hover:text-gray-600 transition-colors duration-200">
+              Blog
+            </a>
+            <a href="#" className="hover:text-gray-600 transition-colors duration-200">
+              About
+            </a>
+            <a href="#" className="hover:text-gray-600 transition-colors duration-200">
+              Contact
+            </a>
           </div>
-          <div className="flex flex-col items-center">
-            <GiFountainPen className="text-[25px]" />
-            <h1 className="text-[12px]">Register</h1>
+          <div className="flex items-center space-x-4">
+            <Search className="w-5 h-5 cursor-pointer" />
+            <div className="relative cursor-pointer">
+              <ShoppingCart className="w-5 h-5" />
+              <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                2
+              </span>
+            </div>
+            <div className="relative cursor-pointer">
+              <Heart className="w-5 h-5" />
+              <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                0
+              </span>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
-            <GoHeart className="text-[25px]"/>
-            <h1 className="text-[12px]">Wishlist</h1>
-          </div>
-          <div className="flex flex-col items-center">
-            <BiGitCompare className="text-[25px]"/>
-            <h1 className="text-[12px]">Compare</h1>
-          </div> 
-        </div>
-        {/* cart */}
-        <div className=" flex bg-sky-700  size-9 rounded-md">
-        <TfiShoppingCart className=" mx-auto mt-1 text-gray-300  text-2xl "/>
         </div>
       </div>
     </nav>

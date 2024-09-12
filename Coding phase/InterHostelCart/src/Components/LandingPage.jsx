@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
-import base from '../assets/base.jpg'
+import base from '../assets/base2.jpg'
 import shoes from '../assets/shoes.jpg'
 import bags from '../assets/bags.jpg'
 import accessories from '../assets/accessories.jpg'

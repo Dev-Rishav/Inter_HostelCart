@@ -1,39 +1,42 @@
+-- Drop the orderHistory table if it exists
+DROP TABLE IF EXISTS orderHistory;
+
+-- Create the orderHistory table
 CREATE TABLE orderHistory (
-    itemNO NUMBER,
-    buyerId NUMBER,
-    sellerID NUMBER,
-    orderDate DATE CONSTRAINT orderDate_not_null NOT NULL,
-    status VARCHAR2(10) CONSTRAINT status_not_null NOT NULL,
+    itemNO INT,
+    buyerId INT,
+    sellerID INT,
+    orderDate DATE NOT NULL,
+    status VARCHAR(10) NOT NULL,
 
     CONSTRAINT fk_oh_seller FOREIGN KEY (sellerID) REFERENCES userTable(userID),
     CONSTRAINT fk_oh_buyer FOREIGN KEY (buyerId) REFERENCES userTable(userID),
     CONSTRAINT fk_oh_item FOREIGN KEY (itemNO) REFERENCES item(itemNO)
 );
 
-drop table orderHistory;
+-- Insert data into the orderHistory table
+INSERT INTO orderHistory (buyerId, itemNO, sellerID, orderDate, status) VALUES
+(1, 50, 2, STR_TO_DATE('02/03/24', '%m/%d/%y'), 'Done'),
+(3, 51, 4, STR_TO_DATE('03/04/24', '%m/%d/%y'), 'Done'),
+(7, 52, 8, STR_TO_DATE('04/05/24', '%m/%d/%y'), 'Done'),
+(9, 53, 10, STR_TO_DATE('05/06/24', '%m/%d/%y'), 'Done'),
+(11, 54, 12, STR_TO_DATE('06/07/24', '%m/%d/%y'), 'Done');
 
-INSERT ALL
-INTO orderHistory(buyerId,itemNO,sellerID,orderDate,status)
-VALUES (219,7,203,TO_DATE('2/3/24','mm/dd/yy'),'Done')
-SELECT * FROM dual;
+-- Select all data from the orderHistory table
+SELECT * FROM orderHistory;
 
-
-select * from ORDERHISTORY;
-
+-- Insert multiple rows using a loop
+DELIMITER //
+CREATE PROCEDURE insert_orderHistory()
 BEGIN
-    FOR i IN 10..30 LOOP
+    DECLARE i INT DEFAULT 10;
+    WHILE i <= 30 DO
         INSERT INTO orderHistory (buyerId, itemNO, sellerID, orderDate, status)
-        SELECT 
-            216,                        -- Fixed buyerId
-            i,                          -- Sequential itemNO
-            219,                        -- Fixed sellerID
-            TO_DATE('2/3/24', 'mm/dd/yy') + (i-1), -- Incrementing orderDate for each entry
-            CASE MOD(i, 2) WHEN 0 THEN 'Done' ELSE 'Pending' END -- Alternating status
-        FROM dual;
-    END LOOP;
-END;
-/
+        VALUES (i MOD 12 + 1, 50 + (i MOD 11), (i + 1) MOD 12 + 1, STR_TO_DATE('07/08/24', '%m/%d/%y'), 'Pending');
+        SET i = i + 1;
+    END WHILE;
+END //
+DELIMITER ;
 
-
-
-SELECT * from ORDERHISTORY;
+-- Call the procedure to insert multiple rows
+CALL insert_orderHistory();

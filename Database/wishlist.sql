@@ -1,17 +1,31 @@
+-- Create the wishList table
 CREATE TABLE wishList (
-    itemNO NUMBER,
-    buyerId NUMBER,
+    itemNO INT,
+    buyerId INT,
 
     CONSTRAINT fk_wl_buyer FOREIGN KEY (buyerId) REFERENCES userTable(userID),
     CONSTRAINT fk_wl_item FOREIGN KEY (itemNO) REFERENCES item(itemNO)
 );
-drop table wishList;
-INSERT ALL
-    INTO WISHLIST (ITEMNO, BUYERID) VALUES (9, 219)
-    INTO WISHLIST (ITEMNO, BUYERID) VALUES (8, 7)
-    INTO WISHLIST (ITEMNO, BUYERID) VALUES (4, 3)
-    INTO WISHLIST (ITEMNO, BUYERID) VALUES (11, 10)
-    INTO WISHLIST (ITEMNO, BUYERID) VALUES (4, 123)
-SELECT * FROM dual;
 
-SELECT * from WISHLIST;
+-- Drop the wishList table if it exists
+DROP TABLE IF EXISTS wishList;
+
+-- Recreate the wishList table
+CREATE TABLE wishList (
+    itemNO INT,
+    buyerId INT,
+
+    CONSTRAINT fk_wl_buyer FOREIGN KEY (buyerId) REFERENCES userTable(userID),
+    CONSTRAINT fk_wl_item FOREIGN KEY (itemNO) REFERENCES item(itemNO)
+);
+
+-- Insert data into the wishList table
+INSERT INTO wishList (itemNO, buyerId) VALUES 
+(9, 219),
+(8, 7),
+(4, 3),
+(11, 10),
+(4, 123);
+
+-- Select all data from the wishList table
+SELECT * FROM wishList;

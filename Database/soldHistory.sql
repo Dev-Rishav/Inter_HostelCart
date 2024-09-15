@@ -1,31 +1,28 @@
-create table soldHistory(
-    transactionID varchar(50) PRIMARY KEY,
-    itemNO NUMBER not null,
-    sellerID NUMBER not NULL,
-    soldPrice NUMBER ,
-    soldDate DATE CONSTRAINT soldDate_not_null NOT NULL,
-   
-   
-    
+-- Drop the soldHistory table if it exists
+DROP TABLE IF EXISTS soldHistory;
+
+-- Create the soldHistory table
+CREATE TABLE soldHistory (
+    transactionID VARCHAR(50) PRIMARY KEY,
+    itemNO INT NOT NULL,
+    sellerID INT NOT NULL,
+    soldPrice INT,
+    soldDate DATE NOT NULL,
+
     CONSTRAINT fk_sh_seller FOREIGN KEY (sellerID) REFERENCES userTable(userID),
     CONSTRAINT fk_sh_item FOREIGN KEY (itemNO) REFERENCES item(itemNO)
-
- 
 );
 
-drop table sol_history;
+-- Insert data into the soldHistory table
+INSERT INTO soldHistory (transactionID, itemNO, sellerID, soldPrice, soldDate) VALUES
+('abcd1234xyz', 50, 1, 400, STR_TO_DATE('15/04/2024', '%d/%m/%Y')),
+('abcd219xyz', 51, 2, 5500, STR_TO_DATE('20/06/2024', '%d/%m/%Y')),
+('abcd216xyz', 52, 3, 150, STR_TO_DATE('10/04/2024', '%d/%m/%Y')),
+('abdc123xyz', 53, 4, 130, STR_TO_DATE('15/05/2024', '%d/%m/%Y'));
 
-insert into SOLDHISTORY values('abcd1234xyz',7,219,400,TO_DATE('15/04/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('abcd219xyz',9,224,5500,TO_DATE('20/06/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('abcd216xyz',1,123,150,TO_DATE('10/04/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('abdc123xyz',3,123,130,TO_DATE('15/05/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('abcd219xyz',5,219,420,TO_DATE('10/07/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('abfg216xyz',10,9,14580,TO_DATE('12/09/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('abcd224xyz',12,16,35050,TO_DATE('15/10/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('bacd219xyz',13,24,12000,TO_DATE('10/11/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('amnd224xyz',15,23,2000,TO_DATE('15/12/2024','dd/mm/yyyy'));
-insert into SOLDHISTORY values('pocd224xyz',14,27,45000,TO_DATE('18/10/2024','dd/mm/yyyy'));
+-- Select all data from the soldHistory table
+SELECT * FROM soldHistory;
 
-desc sold_history;
 
-select * from SOLDHISTORY;
+-- what is the need of this table?
+-- how can I handle this table effieceintly to make queries faster?

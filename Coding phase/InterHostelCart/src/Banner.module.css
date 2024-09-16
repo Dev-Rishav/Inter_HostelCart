@@ -1,0 +1,27 @@
+.image
+{
+  max-height:160px; 
+  max-width:200px; 
+}
+.test
+{
+   display: flex;
+   flex-direction:row;
+   justify-content:center;
+   padding:30px 0px 10px 0px; 
+   background-image:linear-gradient(to right,#b97b51,#ecab80);
+   color: white;
+}
+.text
+{
+  color:rgb(244, 248, 248);
+}
+.picture
+{
+  margin-left: 3cm; 
+}
+.button
+{
+  margin-top:20px;  
+}
+

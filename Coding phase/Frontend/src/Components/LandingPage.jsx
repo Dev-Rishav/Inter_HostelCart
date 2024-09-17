@@ -1,4 +1,5 @@
 import React from 'react';
+import { gsap } from "gsap";
 import { ChevronRight } from 'lucide-react';
 import base from '../assets/base2.jpg'
 import shoes from '../assets/shoes.jpg'

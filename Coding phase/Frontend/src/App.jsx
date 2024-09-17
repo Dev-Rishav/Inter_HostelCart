@@ -1,13 +1,15 @@
-import Navbar from "./Components/Navbar"
-import Navbar2 from "./Components/Navbar2";
-import LandingPage from "./Components/LandingPage";
+import {BrowserRouter as Router, Route, Routes,} from "react-router-dom";
+import React from 'react';
+import Home from "./pages/home";
 function App() {
 
   return (
-    <>
-      <Navbar2 />
-      <LandingPage/>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>}/>    
+
+      </Routes>
+    </Router>
   )
 }
 

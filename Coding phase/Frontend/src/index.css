@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.product-showcase {
+    will-change: transform, opacity;
+  }
+  
+  .product-thumbnail {
+    will-change: transform, opacity;
+  }
+  

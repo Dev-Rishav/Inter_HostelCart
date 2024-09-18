@@ -1,6 +1,6 @@
 
 import Navbar from "./Navbar2"
-
+import Footer from "./Footer";
 
 const Layout=({children})=>{
 
@@ -11,10 +11,10 @@ const Layout=({children})=>{
             <div className="main-content ">
                 {children}
             </div>
-            
+            <Footer/>
 
         </div>
     )
 }
 
-export default Layout
+export default Layout;

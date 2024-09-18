@@ -5,12 +5,14 @@ import Mens from "./pages/Mens";
 import MyShop from "./pages/MyShop";
 import Womens from "./pages/Womens";
 import Contact from "./pages/Contact";
+import  Layout  from "./Components/Layout";
 
 
 function App() {
 
   return (
     <Router>
+      <Layout>
       <Routes>
       <Route path="/" element={<Home />} />
         <Route path="/myShop" element={<MyShop />} />
@@ -18,6 +20,7 @@ function App() {
         <Route path="/mens" element={<Mens />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      </Layout>
     </Router>
   )
 }

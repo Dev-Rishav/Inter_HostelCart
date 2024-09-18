@@ -11,9 +11,7 @@ const Home = () => {
       {!loadingComplete ? (
         <Animation setLoadingComplete={setLoadingComplete} />
       ) : (
-        <Layout>
-          <LandingPage />
-        </Layout>
+          <LandingPage />     
       )}
     </>
   );

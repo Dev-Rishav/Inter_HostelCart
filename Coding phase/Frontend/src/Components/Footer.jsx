@@ -8,10 +8,10 @@ const Footer = () => {
     AOS.init();
   }, []);
 
-  const aosDelay = "300";  
+  const aosDelay = "100";  
   return (
     <footer 
-      data-aos="fade-right"
+      data-aos="fade-bottom"
       data-aos-delay={aosDelay}
       className="py-5 bg-gray-800"
     >

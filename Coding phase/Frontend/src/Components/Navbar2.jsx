@@ -58,7 +58,7 @@ return (
           <ul>
             <li>
               <NavLink
-                to=""
+                to="/profile"
                 className="block py-2 px-4 hover:bg-gray-100"
               >
                 Profile
@@ -66,18 +66,18 @@ return (
             </li>
             <li>
               <NavLink
-                to=""
+                to="/additem"
                 className="block py-2 px-4 hover:bg-gray-100"
               >
-                Settings
+                Add Item
               </NavLink>
             </li>
             <li>
               <NavLink
-                to=""
+                to="/payment"
                 className="block py-2 px-4 hover:bg-gray-100"
               >
-                Logout
+                Payment
               </NavLink>
             </li>
           </ul>

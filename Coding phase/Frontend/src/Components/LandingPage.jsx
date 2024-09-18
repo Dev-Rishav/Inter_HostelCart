@@ -68,6 +68,17 @@ const LandingPage = () => {
               <h1 className='font-bold mt-4 text-lg'> Filter</h1>
               <ChevronRight className="w-4 h-4" />
             </div>
+            
+<div class="relative mb-6">
+    <label for="labels-range-input" class="sr-only">Labels range</label>
+    <input id="labels-range-input" type="range" value="1000" min="100" max="1500" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"/>
+    <span class="text-[10px] text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min (₹100)</span>
+    <span class="text-[10px] text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">₹500</span>
+    <span class="text-[10px] text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">₹1000</span>
+    <span class="text-[10px] text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max (₹1500)</span>
+</div>
+
+
           </div>
         </div>
 

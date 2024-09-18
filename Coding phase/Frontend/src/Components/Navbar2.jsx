@@ -93,15 +93,15 @@ return (
                     CATEGORIES
                 </div>
                 <div className="flex space-x-6 items-center ml-6">
-                    <a href="#" className="hover:text-gray-600">HOME</a>
+                    <Link to="/" className="hover:text-gray-600">HOME</Link>
                     <a href="#" className="hover:text-gray-600">SHOP</a>
-                    <a href="#" className="hover:text-gray-600 flex items-center">
+                    <Link to="/womens" className="hover:text-gray-600 flex items-center">
                         WOMEN <ChevronDown className="w-4 h-4 ml-1" />
-                    </a>
-                    <a href="#" className="hover:text-gray-600 flex items-center">
+                    </Link>
+                    <Link to="/mens" className="hover:text-gray-600 flex items-center">
                         MEN <ChevronDown className="w-4 h-4 ml-1" />
-                    </a>
-                    <a href="#" className="hover:text-gray-600">SALES</a>
+                    </Link>
+                    <Link to="/deal" className="hover:text-gray-600">SALES</Link>
                     <a href="#" className="hover:text-gray-600 flex items-center">
                         PAGES <ChevronDown className="w-4 h-4 ml-1" />
                     </a>

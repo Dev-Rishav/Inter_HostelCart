@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<Orders />} />
+          <Route path="/" element={<Home />} />
           <Route path="/myShop" element={<MyShop />} />
           <Route path="/mens" element={<UnifiedSection items={MenBannerlist} sectionTitle="Men's Section" />} />
           <Route path="/womens" element={<UnifiedSection items={WomenBannerlist} sectionTitle="Women's Section" />} />

@@ -26,10 +26,10 @@ const products = {
 
 const LandingPage = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-full mx-auto px-6 py-8">
       <div className="flex">
         {/* Category Sidebar */}
-        <div className="w-1/4 pr-4">
+        <div className="w-1/4 pr-4 sticky ">
           <div className="bg-gray-100 p-4">
             <h2 className="font-bold mb-4">CATEGORIES</h2>
             <ul className="space-y-2">
@@ -61,8 +61,13 @@ const LandingPage = () => {
                 BAGS & SHOES
                 <ChevronRight className="w-4 h-4" />
               </li>
+              
               <li className="font-bold mt-4">VIEW ALL</li>
             </ul>
+            <div className='flex items-center justify-between'>
+              <h1 className='font-bold mt-4 text-lg'> Filter</h1>
+              <ChevronRight className="w-4 h-4" />
+            </div>
           </div>
         </div>
 

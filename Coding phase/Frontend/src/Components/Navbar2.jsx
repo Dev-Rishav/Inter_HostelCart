@@ -1,7 +1,7 @@
 import React from 'react';
 import { Search, ShoppingCart, ChevronDown } from 'lucide-react';
 import  { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,Link } from 'react-router-dom';
 const Navbar = () => {
 
     const [showMenu, setShowMenu] = useState(false);
@@ -34,11 +34,11 @@ return (
                     <a href="#" className="flex items-center hover:text-gray-600">
                         MY ACCOUNT <ChevronDown className="w-4 h-4 ml-1" />
                     </a>
-                    <a href="#" className="flex items-center hover:text-gray-600">
-                        <ShoppingCart className="w-5 h-5 mr-1" />
-                        MY CART:
-                        <span className="font-bold ml-1">$0.00</span>
-                    </a>
+                    <Link to="/orders" className="flex items-center hover:text-gray-600">
+        <ShoppingCart className="w-5 h-5 mr-1" />
+        MY CART:
+        <span className="font-bold ml-1">₹0.00</span>
+      </Link>
                     <div className="flex items-center">
           <img
             src="https://www.svgrepo.com/show/530412/user.svg"

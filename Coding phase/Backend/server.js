@@ -42,8 +42,8 @@ app.get('/items/sellers-starting-with-r', (req, res) => {
 });
 
 // Route 3: SELECT * FROM transaction WHERE soldDate BETWEEN '01/02/24' AND '28/02/24';
-app.get('/transactions/february-2024', (req, res) => {
-    const sqlQuery = "SELECT * FROM transaction WHERE soldDate BETWEEN '2024-02-01' AND '2024-02-28'";
+app.get('/transactions/february-2017', (req, res) => {
+    const sqlQuery = "SELECT * FROM transaction WHERE soldDate BETWEEN '2016-02-01' AND '2018-02-28'";
     db.query(sqlQuery, (err, result) => {
         if (err) {
             console.error('Error executing query:', err);

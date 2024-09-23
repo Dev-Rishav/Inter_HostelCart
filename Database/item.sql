@@ -37,3 +37,13 @@ INSERT INTO item (sellerID, itemName, itemPrice, itemDescription, itemTags, list
 
 -- Select all data from the item table
 SELECT * FROM item;
+
+
+ALTER TABLE item MODIFY COLUMN itemPhotoURL VARCHAR(512);
+
+INSERT INTO item (sellerID, itemName, itemPrice, itemDescription, itemTags, listingDate, reportflag, itemVisit, itemPhotoURL) VALUES
+(1, 'TP-Link Router 2.4GHz', 500, '6 months old, in very good condition, white in color', 'Router,Electronics', STR_TO_DATE('03/04/24', '%m/%d/%y'), 0, 1, 'https://imgs.search.brave.com/XR7yynlmH6a-KNQbaKvSAJTKcIJ6hlZbmD9HXEubayA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjFEeWEwbDJ4d0wu/anBn'),
+(2, 'Havells Air Cooler', 6000, '6 months old, in very good condition, white in color', 'Cooler,Electronics', STR_TO_DATE('02/03/24', '%m/%d/%y'), 0, 9, 'https://imgs.search.brave.com/lX6X_TiV-7QhIxUZBoOwF6lpUb40O9JxPTpfssiO90Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzF1c0FDM1ZCREwu/anBn'),
+(3, 'Smartphone', 5000, 'Brand new smartphone with latest features', 'Electronics', STR_TO_DATE('03/04/2003', '%m/%d/%Y'), 0, 105, 'https://www.istockphoto.com/photos/android-phone'),
+(4, 'Laptop', 10990, 'High-performance laptop for professional use', 'Electronics', STR_TO_DATE('05/08/2019', '%m/%d/%Y'), 0, 92, 'https://imgs.search.brave.com/p3EuDGCoEomIF1qfXco8ZkK1Tmy5-zBOdwYUgAZgX9k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTg1/MjIzNzEwL3Bob3Rv/L2xhcHRvcC1mbG9h/dGluZy1hbmdsZWQt/b3Blbi5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9Z1VpZkph/cDRkRmtHeW5MQkFz/Q0NCdFR4eWpNNTEx/eTAtODVGLW50R092/VT0'),
+(7, 'Camera', 1600, 'DSLR camera with 4K recording capabilities', 'Electronics', STR_TO_DATE('12/12/2023', '%m/%d/%Y'), 0, 75, 'https://imgs.search.brave.com/wgThZOJSAJxAHjMHsNMIGjlGm_qc3frt7Eh2S4oQHGw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAwLzUyLzQ1LzMy/LzM2MF9GXzUyNDUz/MjkzX3FHQ1JGZGY2/bkVrQ0xqQnVSSUhR/SVFNT09hWW1nTnBO/LmpwZw');

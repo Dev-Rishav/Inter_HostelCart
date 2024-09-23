@@ -1,9 +1,20 @@
 const express = require('express');
 const app = express();
-const db = require('./connection'); // Ensure this is correctly configured
+const db = require('./connection'); 
 
 app.get('/', (req, res) => {
     res.send("From backend");
+});
+
+app.get('/items', (req, res) => {
+    const sqlSelect = "SELECT * FROM item";
+    db.query(sqlSelect, (err, result) => {  
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).json({ error: err.message });
+        }
+        res.send(result);
+    });
 });
 
 app.get('/products', (req, res) => {

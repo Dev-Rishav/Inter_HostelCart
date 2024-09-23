@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 const db = require('./connection'); 
+const cors = require('cors');
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
 
 app.get('/', (req, res) => {
     res.send("From backend");

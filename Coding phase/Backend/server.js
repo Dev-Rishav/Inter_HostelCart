@@ -46,6 +46,29 @@ app.post('/api/items', (req, res) => {
     });
 });
 
+
+app.get('/items/mens/:id', (req, res) => {
+    const sqlSelect = "SELECT * FROM item WHERE gender = 'he' AND sellerID = ?";
+    db.query(sqlSelect, [req.params.id], (err, result) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).json({ error: err.message });
+        }
+        res.send(result);
+    });
+});
+
+app.get('/items/womens/:id', (req, res) => {
+    const sqlSelect = "SELECT * FROM item WHERE gender = 'she' AND sellerID = ?";
+    db.query(sqlSelect, [req.params.id], (err, result) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).json({ error: err.message });
+        }
+        res.send(result);
+    });
+});
+
 //! All these are dummy queries for project presentation purpose
 //? I have to populate the required queries according to the frontend requirements and later move to MVC architecture
 
@@ -60,6 +83,7 @@ app.get('/users/high-priced-items', (req, res) => {
         res.send(result);
     });
 });
+
 
 // Route 2: SELECT * FROM item WHERE SELLERID IN (SELECT USERID FROM userTable WHERE USERNAME LIKE 'R%');
 app.get('/items/sellers-starting-with-r', (req, res) => {

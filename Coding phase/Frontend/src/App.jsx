@@ -23,8 +23,8 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/additem" element={<AddItem />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/mens" element={<UnifiedSection items={MenBannerlist} sectionTitle="Men's Section" />} />
-          <Route path="/womens" element={<UnifiedSection items={WomenBannerlist} sectionTitle="Women's Section" />} />
+          <Route path="/mens" element={<UnifiedSection gender="male" />} />
+          <Route path="/womens" element={<UnifiedSection gender="female" />} />
         </Routes>
       </Layout>
     </Router>

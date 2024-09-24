@@ -22,16 +22,22 @@ app.get('/items', (req, res) => {
     });
 });
 
-app.get('/products', (req, res) => {
-    const sqlSelect = "SELECT * FROM item";
-    db.query(sqlSelect, (err, result) => {
+app.post('/api/items', (req, res) => {
+    const { sellerID, itemName, itemPrice, itemDescription, itemTags, listingDate, itemPhotoURL } = req.body;
+    const reportflag = 0; // Set reportflag to 0 (false) by default
+    const itemVisit = 0; // Set itemVisit to 0 by default
+    const sqlQuery = 'INSERT INTO item (sellerID, itemName, itemPrice, itemDescription, itemTags, listingDate, reportflag, itemVisit, itemPhotoURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    db.query(sqlQuery, [sellerID, itemName, itemPrice, itemDescription, itemTags, listingDate, reportflag, itemVisit, itemPhotoURL], (err, result) => {
         if (err) {
             console.error('Error executing query:', err);
             return res.status(500).json({ error: err.message });
         }
-        res.send(result);
+        res.status(201).json({ message: 'Item added successfully', itemId: result.insertId });
     });
 });
+
+//!All these are dummy queries for project presentation purpose
+//? I have to populate the required queries according to the frontend requirements and later move to MVC architecture
 
 // Route 1: SELECT * FROM userTable WHERE USERID IN (SELECT SELLERID FROM item WHERE ITEMPRICE > 500);
 app.get('/users/high-priced-items', (req, res) => {

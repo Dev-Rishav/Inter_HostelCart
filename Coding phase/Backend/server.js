@@ -2,10 +2,14 @@ const express = require('express');
 const app = express();
 const db = require('./connection'); 
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
+//* Middleware
 app.use(cors({
     origin: 'http://localhost:5173'
 }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.get('/', (req, res) => {
     res.send("From backend");
@@ -22,8 +26,14 @@ app.get('/items', (req, res) => {
     });
 });
 
+
 app.post('/api/items', (req, res) => {
     const { sellerID, itemName, itemPrice, itemDescription, itemTags, listingDate, itemPhotoURL } = req.body;
+    console.log(req.body);
+    
+    if (!sellerID || !itemName || !itemPrice || !itemDescription || !itemTags || !listingDate || !itemPhotoURL) {
+        return res.status(400).json({ error: 'All fields are required' });
+    }
     const reportflag = 0; // Set reportflag to 0 (false) by default
     const itemVisit = 0; // Set itemVisit to 0 by default
     const sqlQuery = 'INSERT INTO item (sellerID, itemName, itemPrice, itemDescription, itemTags, listingDate, reportflag, itemVisit, itemPhotoURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';

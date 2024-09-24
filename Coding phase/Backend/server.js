@@ -10,7 +10,7 @@ app.use(cors({
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+//* Routes
 app.get('/', (req, res) => {
     res.send("From backend");
 });
@@ -46,7 +46,7 @@ app.post('/api/items', (req, res) => {
     });
 });
 
-//!All these are dummy queries for project presentation purpose
+//! All these are dummy queries for project presentation purpose
 //? I have to populate the required queries according to the frontend requirements and later move to MVC architecture
 
 // Route 1: SELECT * FROM userTable WHERE USERID IN (SELECT SELLERID FROM item WHERE ITEMPRICE > 500);

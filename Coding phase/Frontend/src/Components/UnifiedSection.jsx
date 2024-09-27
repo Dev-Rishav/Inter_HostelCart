@@ -33,7 +33,7 @@ const UnifiedSection = ({ gender }) => {
               <div className="p-6">
                 <h2 className="text-2xl font-semibold mb-2 text-gray-800">{item.itemName}</h2>
                 <p className="text-gray-600 mb-4">{item.itemDescription}</p>
-                <p className="text-gray-600 mb-4">Price: ${item.itemPrice}</p>
+                <p className="text-gray-600 mb-4">Price: ₹{item.itemPrice}</p>
                 <p className="text-gray-600 mb-4">Tags: {item.itemTags}</p>
                 <p className="text-gray-600 mb-4">Visits: {item.itemVisit}</p>
                 <button className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300">Add to Cart</button>

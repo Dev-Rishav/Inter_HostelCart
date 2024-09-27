@@ -3,12 +3,18 @@ const app = express();
 const db = require('./connection'); 
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const secretKey = process.env.SECRET_KEY; 
 
 //* Middleware
 app.use(cors({
     origin: 'http://localhost:5173'
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
 
 //* Routes
 app.get('/', (req, res) => {
@@ -66,6 +72,46 @@ app.get('/items/womens/:id', (req, res) => {
             return res.status(500).json({ error: err.message });
         }
         res.send(result);
+    });
+});
+
+
+
+//Authentication
+app.post('/api/login', (req, res) => {
+    const { email, password } = req.body;    
+
+    const sqlSelect = "SELECT * FROM userTable WHERE emailID = ?";
+    db.query(sqlSelect, [email], (err, result) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+
+        if (result.length === 0) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
+        const user = result[0];
+        // console.log(user);
+        // return res.json(user);
+        
+        bcrypt.compare(password, user.userPassword, (err, isMatch) => {
+            console.log(isMatch);
+            
+            
+            if (err) {
+                console.error('Error comparing passwords:', err);
+                return res.status(500).json({ error: 'Internal server error' });
+            }
+
+            if (!isMatch) {
+                return res.status(401).json({ error: 'Invalid email or password' });
+            }
+
+            const token = jwt.sign({ userId: user.userID }, secretKey, { expiresIn: '1h' });
+            res.json({ token });
+        });
     });
 });
 

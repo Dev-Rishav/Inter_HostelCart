@@ -24,19 +24,3 @@ INSERT INTO orderHistory (buyerId, itemNO, sellerID, orderDate, status) VALUES
 
 -- Select all data from the orderHistory table
 SELECT * FROM orderHistory;
-
--- Insert multiple rows using a loop
-DELIMITER //
-CREATE PROCEDURE insert_orderHistory()
-BEGIN
-    DECLARE i INT DEFAULT 10;
-    WHILE i <= 30 DO
-        INSERT INTO orderHistory (buyerId, itemNO, sellerID, orderDate, status)
-        VALUES (i MOD 12 + 1, 50 + (i MOD 11), (i + 1) MOD 12 + 1, STR_TO_DATE('07/08/24', '%m/%d/%y'), 'Pending');
-        SET i = i + 1;
-    END WHILE;
-END //
-DELIMITER ;
-
--- Call the procedure to insert multiple rows
-CALL insert_orderHistory();

@@ -1,13 +1,4 @@
 import React ,{useEffect,useState} from 'react';
-import Image1 from '../assets/Image1.png';
-import Image2 from '../assets/Image2.png';
-import Image3 from '../assets/Image3.png';
-import Image4 from '../assets/Image4.png';
-import Image5 from '../assets/Image5.png';
-import Image6 from '../assets/Image6.png';
-import order1 from '../assets/order1.jpg';
-import order2 from '../assets/order2.jpg';  
-import accessories from '../assets/accessories.jpg';   
 import {getItems } from '../api';
 
 
@@ -53,10 +44,10 @@ const Product = () => {
 
             <div className='products grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 -content-center bg-gray-100 p-8 rounded-2xl'>
                 {items.map(item => (
-                    <div key={item.itemNO} className='product h-[350px] space-y-2 cursor-pointer rounded-xl shadow-2xl p-4'>
-                        <img className='w-full h-4/5 object-cover' loading='lazy' src={item.itemPhotoURL} alt={item.ITEMNAME} />
-                        <p className='font-semibold text-gray-600'>{item.itemName}</p>
-                        <h1 className='text-xl font-semibold'>₹{item.itemPrice}</h1>
+                    <div key={item.itemno} className='product h-[350px] space-y-2 cursor-pointer rounded-xl shadow-2xl p-4'>
+                        <img className='w-full h-4/5 object-cover' loading='lazy' src={item.itemphotourl} alt={item.itemname} />
+                        <p className='font-semibold text-gray-600'>{item.itemname}</p>
+                        <h1 className='text-xl font-semibold'>₹{item.itemprice}</h1>
                     </div>
                 ))}
             </div>

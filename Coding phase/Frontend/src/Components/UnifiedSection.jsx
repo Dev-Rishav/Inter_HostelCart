@@ -8,9 +8,10 @@ const UnifiedSection = ({ gender }) => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const endpoint = gender === 'male' ? 'http://localhost:3001/items/mens/1' : 'http://localhost:3001/items/womens/1';
-        const response = await axios.get(endpoint);
-        setItems(response.data);
+        const endpoint = gender === 'male' ? 'http://localhost:3001/api/items/he/1' : 'http://localhost:3001/api/items/she/1';
+        const response = await axios.get(endpoint); 
+        // console.log(response.data.rows); 
+        setItems(response.data.rows);
         setSectionTitle(gender === 'male' ? 'Items for Men' : 'Items for Women');
       } catch (error) {
         console.error('Error fetching items:', error);
@@ -28,14 +29,14 @@ const UnifiedSection = ({ gender }) => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {items.map(item => (
-            <div key={item.id} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105">
-              <img src={item.itemPhotoURL} alt={item.itemName} className="w-full h-56 object-cover" />
+            <div key={item.itemno} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105">
+              <img src={item.itemphotourl} alt={item.itemname} className="w-full h-56 object-cover" />
               <div className="p-6">
-                <h2 className="text-2xl font-semibold mb-2 text-gray-800">{item.itemName}</h2>
-                <p className="text-gray-600 mb-4">{item.itemDescription}</p>
-                <p className="text-gray-600 mb-4">Price: ₹{item.itemPrice}</p>
-                <p className="text-gray-600 mb-4">Tags: {item.itemTags}</p>
-                <p className="text-gray-600 mb-4">Visits: {item.itemVisit}</p>
+                <h2 className="text-2xl font-semibold mb-2 text-gray-800">{item.itemname}</h2>
+                <p className="text-gray-600 mb-4">{item.itemdescription}</p>
+                <p className="text-gray-600 mb-4">Price: ₹{item.itemprice}</p>
+                <p className="text-gray-600 mb-4">Tags: {item.itemtags}</p>
+                <p className="text-gray-600 mb-4">Visits: {item.itemvisit}</p>
                 <button className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300">Add to Cart</button>
               </div>
             </div>

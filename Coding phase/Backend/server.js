@@ -29,7 +29,8 @@ app.listen(PORT, () => {
 });
 
 
-//MVC
-//API enpoint for admin panel
-//userSchema updation for admin panel
-//dp attribute for userSchema
+//TODO[DONE]MVC
+//TODO API enpoint for admin panel
+//TODO userSchema updation for admin panel
+//TODO dp attribute for userSchema
+//TODO user cart control

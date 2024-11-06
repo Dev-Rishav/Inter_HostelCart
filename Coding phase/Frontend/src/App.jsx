@@ -11,6 +11,7 @@ import Orders from './pages/Orders';
 import Deal from './pages/Deal';
 import AddItem from './Components/AddItem';
 import Profile from './Components/Profile';
+import Login from './Components/Login';
 function App() {
   return (
     <Router>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/mens" element={<UnifiedSection gender="male" />} />
           <Route path="/womens" element={<UnifiedSection gender="female" />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Layout>
     </Router>

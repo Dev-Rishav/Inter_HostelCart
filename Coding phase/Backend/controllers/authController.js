@@ -32,12 +32,14 @@ const authController = {
         return res.status(500).json({ error: 'Internal server error' });
       }
 
-      if (result.length === 0) {
+      if (result.rows.length === 0) {
         return res.status(401).json({ error: 'Invalid email or password' });
       }
 
-      const user = result[0];
-      bcrypt.compare(password, user.userPassword, (err, isMatch) => {
+      const user = result.rows[0];
+      console.log(result.rows);
+      
+      bcrypt.compare(password, user.userpassword, (err, isMatch) => {
         if (err) {
           console.error('Error comparing passwords:', err);
           return res.status(500).json({ error: 'Internal server error' });

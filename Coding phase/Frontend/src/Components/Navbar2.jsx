@@ -39,9 +39,9 @@ return (
                     </div>
                 </div>
                 <div className="flex items-center space-x-4">
-                    <a href="#" className="flex items-center hover:text-gray-600">
-                        MY ACCOUNT <ChevronDown className="w-4 h-4 ml-1" />
-                    </a>
+                    <Link to="/login" className="flex items-center hover:text-gray-600">
+                       Login <ChevronDown className="w-4 h-4 ml-1" />
+                    </Link>
                     <Link to="/orders" className="flex items-center hover:text-gray-600">
         <ShoppingCart className="w-5 h-5 mr-1" />
         MY CART:

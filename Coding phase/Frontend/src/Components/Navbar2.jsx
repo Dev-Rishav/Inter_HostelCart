@@ -2,12 +2,20 @@ import React from 'react';
 import { Search, ShoppingCart, ChevronDown } from 'lucide-react';
 import  { useState } from 'react';
 import { NavLink,Link } from 'react-router-dom';
+import { useNavigate } from "react-router";
 const Navbar = () => {
 
     const [showMenu, setShowMenu] = useState(false);
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
+  };
+  const navigate = useNavigate();
+  const handleSelectChange = (event) => {
+    const selectedPage = event.target.value;
+    if (selectedPage) {
+      navigate(selectedPage); // Navigate to the selected page
+    }
   };
 return (
     <nav className="bg-white">
@@ -94,14 +102,18 @@ return (
                 </div>
                 <div className="flex space-x-6 items-center ml-6">
                     <Link to="/" className="hover:text-gray-600">HOME</Link>
-                  
-                    <Link to="/womens" className="hover:text-gray-600 flex items-center">
-                        WOMEN <ChevronDown className="w-4 h-4 ml-1" />
-                    </Link>
-                    <Link to="/mens" className="hover:text-gray-600 flex items-center">
-                        MEN <ChevronDown className="w-4 h-4 ml-1" />
-                    </Link>
-                    <Link to="/deal" className="hover:text-gray-600">SALES</Link>
+                    <select name="collection" className=" bg-gray-700" onChange={handleSelectChange} defaultValue="" >
+                    <option value="">Clothing</option>
+                      <option value="/mens" >MEN</option>
+                      <option value="/womens"  >WOMEN</option>
+                   </select>
+                    
+                    <Link to="/deal" className="hover:text-gray-600">Electronics</Link>
+                    <Link to="/deal" className="hover:text-gray-600">Stationary</Link>
+                    <Link to="/deal" className="hover:text-gray-600">Vehicle</Link>
+                    <Link to="/deal" className="hover:text-gray-600">Sport</Link>
+                    <Link to="/deal" className="hover:text-gray-600">Medicine</Link>
+                    <Link to="/deal" className="hover:text-gray-600">Accessories</Link>
                   
                   
                 </div>

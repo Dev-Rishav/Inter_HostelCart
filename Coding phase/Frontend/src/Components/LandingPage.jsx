@@ -6,7 +6,7 @@ import shoes from '../assets/shoes.jpg'
 import bags from '../assets/bags.jpg'
 import accessories from '../assets/accessories.jpg'
 
-
+// YE PURA PAGE HE BEKAR HAI 
 // imported from the api
 const products = {
     Bags: [

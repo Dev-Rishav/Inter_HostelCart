@@ -36,23 +36,6 @@ const UnifiedSection = ({ gender,tag }) => {
               {
                 endpoint='http://localhost:3001/api/items/accessories';
               }
-              else if(tag==='stationary') 
-                {
-                  endpoint='http://localhost:3001/api/items/stationary';
-                }
-                else if(tag==='vehicle') 
-                  {
-                    endpoint='http://localhost:3001/api/items/vehicle';
-                  }
-                  else if(tag==='sport') 
-                    {
-                      endpoint='http://localhost:3001/api/items/sport';
-                    }
-                    else if(tag==='medicine') 
-                      {
-                        endpoint='http://localhost:3001/api/items/medicine';
-                      }
-          
               
              } catch (error) {
                 console.error('Error fetching items:', error)

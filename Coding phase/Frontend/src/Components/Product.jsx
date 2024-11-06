@@ -42,9 +42,9 @@ const Product = () => {
                 </div>
             </div>
 
-            <div className='products grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 -content-center bg-gray-100 p-8 rounded-2xl'>
+            <div className='products grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 -content-center bg-gray-100 p-8 rounded-2xl shadow-lg  '>
                 {items.map(item => (
-                    <div key={item.itemno} className='product h-[350px] space-y-2 cursor-pointer rounded-xl shadow-2xl p-4'>
+                    <div key={item.itemno} className='product h-[350px] space-y-2 cursor-pointer rounded-xl shadow-2xl p-4 overflow-hidden transform transition duration-500 hover:scale-105'>
                         <img className='w-full h-4/5 object-cover' loading='lazy' src={item.itemphotourl} alt={item.itemname} />
                         <p className='font-semibold text-gray-600'>{item.itemname}</p>
                         <h1 className='text-xl font-semibold'>₹{item.itemprice}</h1>

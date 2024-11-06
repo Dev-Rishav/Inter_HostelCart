@@ -48,6 +48,18 @@ const itemController = {
       }
       res.send(result);
     });
+  },
+  getItemsByTag:(req,res)=>{
+    
+    const tag=req.params;
+    Item.getByTag(tag, (err, result) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        return res.status(500).json({ error: err.message });
+      }
+      
+      res.send(result);
+    });
   }
 };
 

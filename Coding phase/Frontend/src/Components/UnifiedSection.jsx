@@ -1,18 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const UnifiedSection = ({ gender }) => {
+const UnifiedSection = ({ gender,tag }) => {
   const [items, setItems] = useState([]);
   const [sectionTitle, setSectionTitle] = useState('');
-
+  // console.log(tag); 
   useEffect(() => {
     const fetchItems = async () => {
-      try {
-        const endpoint = gender === 'male' ? 'http://localhost:3001/api/items/he/1' : 'http://localhost:3001/api/items/she/1';
-        const response = await axios.get(endpoint); 
-        // console.log(response.data.rows); 
-        setItems(response.data.rows);
-        setSectionTitle(gender === 'male' ? 'Items for Men' : 'Items for Women');
+      try { 
+        let endpoint;
+        if(gender)
+        {
+           try {
+            endpoint = gender === 'male' ? 'http://localhost:3001/api/items/he/1' : 'http://localhost:3001/api/items/she/1';
+            setSectionTitle(gender === 'male' ? 'Items for Men' : 'Items for Women');
+           } catch (error) {
+              console.error('Error fetching items:', error)
+           }
+          const response = await axios.get(endpoint); 
+          console.log(response.data.rows); 
+          setItems(response.data.rows);
+          }
+          else {
+            try {
+              //const endpoint = tag === 'MALE' ? 'http://localhost:3001/api/items/he/1' : 'http://localhost:3001/api/items/she/1';
+              if(tag==='electronics')
+              {
+                //console.log("ghus raha hai");
+                
+                endpoint='http://localhost:3001/api/items/electronics';
+                console.log(endpoint);
+                
+              }
+              else if(tag==='accessories') 
+              {
+                endpoint='http://localhost:3001/api/items/accessories';
+              }
+          
+              
+             } catch (error) {
+                console.error('Error fetching items:', error)
+             }
+          const response = await axios.get(endpoint); 
+          console.log(response.data.fields); 
+          setItems(response.data.rows);
+          }
+
       } catch (error) {
         console.error('Error fetching items:', error);
       }
@@ -27,7 +60,7 @@ const UnifiedSection = ({ gender }) => {
       {items.length === 0 ? (
         <p className="text-center text-gray-600">No items for sale</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
           {items.map(item => (
             <div key={item.itemno} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105">
               <img src={item.itemphotourl} alt={item.itemname} className="w-full h-56 object-cover" />

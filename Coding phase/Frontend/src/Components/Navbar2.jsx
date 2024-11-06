@@ -108,12 +108,12 @@ return (
                       <option value="/womens"  >WOMEN</option>
                    </select>
                     
-                    <Link to="/deal" className="hover:text-gray-600">Electronics</Link>
+                    <Link to="/electronics" className="hover:text-gray-600">Electronics</Link>
                     <Link to="/deal" className="hover:text-gray-600">Stationary</Link>
                     <Link to="/deal" className="hover:text-gray-600">Vehicle</Link>
                     <Link to="/deal" className="hover:text-gray-600">Sport</Link>
                     <Link to="/deal" className="hover:text-gray-600">Medicine</Link>
-                    <Link to="/deal" className="hover:text-gray-600">Accessories</Link>
+                    <Link to="/accessories" className="hover:text-gray-600">Accessories</Link>
                   
                   
                 </div>

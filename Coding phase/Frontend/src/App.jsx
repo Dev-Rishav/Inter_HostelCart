@@ -26,6 +26,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/mens" element={<UnifiedSection gender="male" />} />
           <Route path="/womens" element={<UnifiedSection gender="female" />} />
+          <Route path="/electronics" element={<UnifiedSection tag="electronics" />} />
+          <Route path="/accessories" element={<UnifiedSection tag="accessories" />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Layout>

@@ -5,15 +5,18 @@ const secretKey = process.env.SECRET_KEY;
 
 const authController = {
   signup: (req, res) => {
-    const { username, password, email } = req.body;
+    const { emailid,hostelno,roomno,username,userdob,userphoneno,userpassword,userdept,usercourse } = req.body;    
+    // console.log(email,hostel,room,username,dob,phone,password,dept,course);
+    
 
-    bcrypt.hash(password, 10, (err, hash) => {
+    bcrypt.hash(userpassword, 10, (err, hash) => {
       if (err) {
+        // console.log(password);
         console.error('Error hashing password:', err);
         return res.status(500).json({ error: 'Internal server error' });
       }
 
-      User.create(username, hash, email, (err, result) => {
+      User.create(emailid,hostelno,roomno,username,userdob,userphoneno,hash,userdept,usercourse, (err, result) => {
         if (err) {
           console.error('Error executing query:', err);
           return res.status(500).json({ error: 'Internal server error' });

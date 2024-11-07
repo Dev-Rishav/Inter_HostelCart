@@ -109,10 +109,10 @@ return (
                    </select>
                     
                     <Link to="/electronics" className="hover:text-gray-600">Electronics</Link>
-                    <Link to="/deal" className="hover:text-gray-600">Stationary</Link>
-                    <Link to="/deal" className="hover:text-gray-600">Vehicle</Link>
-                    <Link to="/deal" className="hover:text-gray-600">Sport</Link>
-                    <Link to="/deal" className="hover:text-gray-600">Medicine</Link>
+                    <Link to="/stationary" className="hover:text-gray-600">Stationary</Link>
+                    <Link to="/vehicle" className="hover:text-gray-600">Vehicle</Link>
+                    <Link to="/sport" className="hover:text-gray-600">Sport</Link>
+                    <Link to="/medicine" className="hover:text-gray-600">Medicine</Link>
                     <Link to="/accessories" className="hover:text-gray-600">Accessories</Link>
                   
                   

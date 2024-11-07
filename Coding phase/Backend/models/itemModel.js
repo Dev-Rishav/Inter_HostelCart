@@ -14,9 +14,11 @@ const Item = {
     pool.query(sqlSelect, [gender, sellerID], callback);
   },
   getByTag:(tag,callback)=>{
-    const sqlGet="SELECT * FROM item WHERE itemtags = $1 OR itemprice>500 ";  //OR gender='he'
-    pool.query(sqlGet,[tag],callback);
-    console.log();
+    const sqlGet="SELECT * FROM item WHERE item.itemtags =$1  ";  //OR gender='he'
+    
+    
+    pool.query(sqlGet,[tag.tag],callback);
+  
     
   }
 };

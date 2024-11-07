@@ -36,6 +36,22 @@ const UnifiedSection = ({ gender,tag }) => {
               {
                 endpoint='http://localhost:3001/api/items/accessories';
               }
+              else if(tag==='stationary') 
+                {
+                  endpoint='http://localhost:3001/api/items/stationary';
+                }
+                else if(tag==='vehicle') 
+                  {
+                    endpoint='http://localhost:3001/api/items/vehicle';
+                  }
+                  else if(tag==='sport') 
+                    {
+                      endpoint='http://localhost:3001/api/items/sport';
+                    }
+                    else if(tag==='medicine') 
+                      {
+                        endpoint='http://localhost:3001/api/items/medicine';
+                      }
           
               
              } catch (error) {
@@ -52,7 +68,7 @@ const UnifiedSection = ({ gender,tag }) => {
     };
 
     fetchItems();
-  }, [gender]);
+  }, [gender,tag]);
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">

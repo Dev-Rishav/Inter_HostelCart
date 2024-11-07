@@ -28,6 +28,10 @@ function App() {
           <Route path="/womens" element={<UnifiedSection gender="female" />} />
           <Route path="/electronics" element={<UnifiedSection tag="electronics" />} />
           <Route path="/accessories" element={<UnifiedSection tag="accessories" />} />
+          <Route path="/stationary" element={<UnifiedSection tag="stationary" />} />
+          <Route path="/vehicle" element={<UnifiedSection tag="vehicle" />} />
+          <Route path="/sport" element={<UnifiedSection tag="sport" />} />
+          <Route path="/medicine" element={<UnifiedSection tag="medicine" />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Layout>

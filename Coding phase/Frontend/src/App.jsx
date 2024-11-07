@@ -2,8 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './Components/Layout'; 
 import UnifiedSection from './Components/UnifiedSection';
-import MenBannerlist from './json/mensItems';
-import WomenBannerlist from './json/womensItems';
 import Payment from './Components/Payment'
 import Home from './pages/Home'; 
 import MyShop from './pages/MyShop'; 
@@ -13,7 +11,7 @@ import AddItem from './Components/AddItem';
 import Profile from './Components/Profile';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
-
+import Mycart from './pages/Mycart';
 function App() {
   return (
     <Router>
@@ -30,6 +28,7 @@ function App() {
           <Route path="/womens" element={<UnifiedSection gender="female" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/mycart" element={<Mycart />} />
         </Routes>
       </Layout>
     </Router>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import axios from "axios";
+import Cookies from "js-cookie";
 import img from "../assets/login.jpeg";
 import { Link } from "react-router-dom";
 
@@ -10,20 +11,16 @@ const Login = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3001/api/auth/login", formData);
       const { token } = response.data;
-      localStorage.setItem("token", token);
-      console.log(token);
-      
+      Cookies.set("token", token, { expires: 1 }); // Set cookie to expire in 1 day      
       // Redirect to a protected route or dashboard
-      // window.location.href = "/profile";
+      window.location.href = "/profile";
     } catch (error) {
       setError("Invalid email or password");
     }

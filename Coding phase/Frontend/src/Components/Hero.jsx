@@ -4,7 +4,6 @@ import Carousel from "./Carousel"
 import { gsap } from "gsap";
 
 
-
 const Hero = () => {
     const textRef = useRef(null);
 
@@ -53,7 +52,7 @@ const Hero = () => {
     );
   }, []);
     return (
-        <div className="w-11/12 xl:w-4/5 h-[350px] m-auto mt-8 bg-stone-200 rounded-xl">
+        <div className="w-11/12 xl:w-4/5 h-[350px] m-auto mt-8 bg-stone-200 rounded-xl" >
             <div className="w-full h-full flex justify-center items-center">
                 <div className="w-11/12 xl:w-1/2 p-5 space-y-5">
                     <h1 className="text-5xl font-semibold">

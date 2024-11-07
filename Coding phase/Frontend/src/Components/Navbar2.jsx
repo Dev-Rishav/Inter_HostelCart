@@ -55,7 +55,7 @@ return (
                 Login <ChevronDown className="w-4 h-4 ml-1" />
               </Link>
             )}
-                    <Link to="/orders" className="flex items-center hover:text-gray-600">
+                    <Link to="/mycart" className="flex items-center hover:text-gray-600">
         <ShoppingCart className="w-5 h-5 mr-1" />
         MY CART:
         <span className="font-bold ml-1">₹0.00</span>
@@ -99,6 +99,14 @@ return (
                 className="block py-2 px-4 hover:bg-gray-100"
               >
                 Payment
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/orders"
+                className="block py-2 px-4 hover:bg-gray-100"
+              >
+                Orders
               </NavLink>
             </li>
           </ul>

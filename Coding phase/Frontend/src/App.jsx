@@ -13,6 +13,7 @@ import AddItem from './Components/AddItem';
 import Profile from './Components/Profile';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import Mycart from './pages/Mycart';
 function App() {
   return (
     <Router>
@@ -35,6 +36,7 @@ function App() {
           <Route path="/medicine" element={<UnifiedSection tag="medicine" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/mycart" element={<Mycart />} />
         </Routes>
       </Layout>
     </Router>

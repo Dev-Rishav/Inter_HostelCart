@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const itemRoutes = require('./routes/itemRoutes');
-const db = require('./config/db');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 //* Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
+app.use("/api/user",userRoutes);
 
 app.get('/', (req, res) => {
   res.send('From backend');

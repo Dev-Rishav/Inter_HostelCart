@@ -3,19 +3,26 @@ import { Search, ShoppingCart, ChevronDown } from 'lucide-react';
 import  { useState } from 'react';
 import { NavLink,Link } from 'react-router-dom';
 import { useNavigate } from "react-router";
+import Cookies from 'js-cookie';
 const Navbar = () => {
 
     const [showMenu, setShowMenu] = useState(false);
+    const navigate = useNavigate();
+  const token = Cookies.get("token");
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
-  const navigate = useNavigate();
+  
   const handleSelectChange = (event) => {
     const selectedPage = event.target.value;
     if (selectedPage) {
       navigate(selectedPage); // Navigate to the selected page
     }
+  };
+  const handleLogout = () => {
+    Cookies.remove("token");
+    navigate("/login");
   };
 return (
     <nav className="bg-white">
@@ -39,9 +46,15 @@ return (
                     </div>
                 </div>
                 <div className="flex items-center space-x-4">
-                    <Link to="/login" className="flex items-center hover:text-gray-600">
-                       Login <ChevronDown className="w-4 h-4 ml-1" />
-                    </Link>
+                {token ? (
+              <button onClick={handleLogout} className="flex items-center hover:text-gray-600">
+                Logout <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+            ) : (
+              <Link to="/login" className="flex items-center hover:text-gray-600">
+                Login <ChevronDown className="w-4 h-4 ml-1" />
+              </Link>
+            )}
                     <Link to="/orders" className="flex items-center hover:text-gray-600">
         <ShoppingCart className="w-5 h-5 mr-1" />
         MY CART:

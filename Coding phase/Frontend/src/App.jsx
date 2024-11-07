@@ -12,6 +12,8 @@ import Deal from './pages/Deal';
 import AddItem from './Components/AddItem';
 import Profile from './Components/Profile';
 import Login from './Components/Login';
+import Signup from './Components/Signup';
+
 function App() {
   return (
     <Router>
@@ -27,6 +29,7 @@ function App() {
           <Route path="/mens" element={<UnifiedSection gender="male" />} />
           <Route path="/womens" element={<UnifiedSection gender="female" />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </Layout>
     </Router>

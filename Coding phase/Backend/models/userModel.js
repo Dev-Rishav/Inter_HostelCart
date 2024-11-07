@@ -8,6 +8,20 @@ const User = {
   findByEmail: (email, callback) => {
     const sqlSelect = "SELECT * FROM usertable WHERE emailid = $1";
     pool.query(sqlSelect, [email], callback);
+  },
+  findById: (userId, callback) => {
+    // console.log("hi",userId);
+    
+    const sqlSelect = "SELECT * FROM usertable WHERE userid = $1";
+    pool.query(sqlSelect, [userId], callback);
+  },
+  updateMobileNumber: (userId, mobileNumber, callback) => {
+    const sqlUpdate = "UPDATE usertable SET userphoneno = $1 WHERE userid = $2";
+    pool.query(sqlUpdate, [mobileNumber, userId], callback);
+  },
+  updateProfileImage: (userId, image, callback) => {
+    const sqlUpdate = "UPDATE usertable SET profileImage = $1 WHERE userid = $2";
+    pool.query(sqlUpdate, [image, userId], callback);
   }
 };
 

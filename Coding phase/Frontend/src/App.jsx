@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './Components/Layout'; 
 import UnifiedSection from './Components/UnifiedSection';
+import MenBannerlist from './json/mensItems';
+import WomenBannerlist from './json/womensItems';
 import Payment from './Components/Payment'
 import Home from './pages/Home'; 
 import MyShop from './pages/MyShop'; 
@@ -26,6 +28,12 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/mens" element={<UnifiedSection gender="male" />} />
           <Route path="/womens" element={<UnifiedSection gender="female" />} />
+          <Route path="/electronics" element={<UnifiedSection tag="electronics" />} />
+          <Route path="/accessories" element={<UnifiedSection tag="accessories" />} />
+          <Route path="/stationary" element={<UnifiedSection tag="stationary" />} />
+          <Route path="/vehicle" element={<UnifiedSection tag="vehicle" />} />
+          <Route path="/sport" element={<UnifiedSection tag="sport" />} />
+          <Route path="/medicine" element={<UnifiedSection tag="medicine" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/mycart" element={<Mycart />} />

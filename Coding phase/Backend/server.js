@@ -5,8 +5,16 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const userRoutes = require('./routes/userRoutes');
+const { Server } = require('socket.io');
 
 const app = express();
+const server = require('http').createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3001', // Replace with your frontend's origin
+    methods: ['GET', 'POST']
+  }
+});
 
 //* Middleware
 app.use(cors({
@@ -23,6 +31,25 @@ app.use("/api/user",userRoutes);
 app.get('/', (req, res) => {
   res.send('From backend');
 });
+
+// WebSocket connection
+io.on('connection', (socket) => {
+  console.log('A user connected:', socket.id);
+
+  socket.on('joinRoom', (room) => {
+    socket.join(room);
+    console.log(`User ${socket.id} joined room ${room}`);
+  });
+
+  socket.on('sendMessage', (message) => {
+    io.to(message.room).emit('receiveMessage', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected:', socket.id);
+  });
+});
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

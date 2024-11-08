@@ -38,7 +38,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/mycart" element={<Mycart />} />
-          <Route path="/item" element={<Item />} />
+          <Route path="/item/:itemid" element={<Item />} />
         </Routes>
       </Layout>
     </Router>

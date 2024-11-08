@@ -20,6 +20,11 @@ const Item = {
     pool.query(sqlGet,[tag.tag],callback);
   
     
+  },
+  getById:(id,callback)=>{
+    const love="SELECT * FROM item JOIN usertable ON item.sellerid = usertable.userid WHERE item.itemno = $1 ";
+    
+    pool.query(love,[id],callback);
   }
 };
 

@@ -28,6 +28,9 @@ INSERT INTO userTable (emailID, hostelNo, roomNo, userName, userDOB, userPhoneNo
     ('2320403208.manit.ac.in', 9, 9025, 'Risu Kumar Gupta', '2001-01-01', 9798571703, 'I am risu', 'MBC', 'MCA'),
     ('2320403209.manit.ac.in', 9, 9007, 'Mohit Paliwal', '2003-09-20', 9395856355, 'I am Mohit', 'MBC', 'MCA'),
     ('2320403210.manit.ac.in', 9, 9024, 'Vikas Nayma', '2001-10-03', 9795271703, 'I am Vikas', 'MBC', 'MCA');
-    
 
+
+INSERT INTO userTable (emailID, hostelNo, roomNo, userName, userDOB, userPhoneNo, userPassword, userDept, userCourse) VALUES
+ ('2320403203@stu.manit.ac.in', 9, 9003, 'Atul', '2002-10-26', 9399356355, 'atul1234', 'ME', 'B.Tech'),
+    ('2320403208@stu.manit.ac.in', 9, 9025, 'Risu Kumar Gupta', '2001-01-01', 9798571703, 'I am risu', 'MBC', 'MCA');
     

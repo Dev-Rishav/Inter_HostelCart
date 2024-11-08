@@ -2,7 +2,7 @@ import React from 'react';
 import { Search, ShoppingCart, ChevronDown } from 'lucide-react';
 import  { useState } from 'react';
 import { NavLink,Link } from 'react-router-dom';
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 const Navbar = () => {
 

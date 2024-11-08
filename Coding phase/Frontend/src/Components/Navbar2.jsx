@@ -4,8 +4,11 @@ import  { useState } from 'react';
 import { NavLink,Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+
 const Navbar = () => {
 
+    const totalAmount = useSelector(state => state.cart.totalAmount);
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
   const token = Cookies.get("token");
@@ -58,7 +61,7 @@ return (
                     <Link to="/mycart" className="flex items-center hover:text-gray-600">
         <ShoppingCart className="w-5 h-5 mr-1" />
         MY CART:
-        <span className="font-bold ml-1">₹0.00</span>
+        <span className="font-bold ml-1"> ₹{totalAmount}</span>
       </Link>
                     <div className="flex items-center">
           <img

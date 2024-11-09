@@ -15,3 +15,5 @@ INSERT INTO wishList (itemNO, buyerId) VALUES
 (24, 1);
 
 select * from wishlist;
+
+alter table wishlist rename to cart;

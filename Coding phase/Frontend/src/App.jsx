@@ -15,6 +15,7 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Mycart from './pages/Mycart';
 import Item from './pages/Item';
+import AdminDashboard from './pages/AdminDashboard';
 function App() {
   return (
     <Router>
@@ -39,6 +40,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/mycart" element={<Mycart />} />
           <Route path="/item/:itemid" element={<Item />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </Layout>
     </Router>

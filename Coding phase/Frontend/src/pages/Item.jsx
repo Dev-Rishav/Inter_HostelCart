@@ -11,7 +11,7 @@ const Item = () => {
   const [item, setItem] = useState({});
   const { itemid } = useParams();
   
-  console.log(itemid);
+  // console.log(itemid);
   
   const fetchitem=async()=>{
      try {

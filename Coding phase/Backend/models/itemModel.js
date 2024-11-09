@@ -22,9 +22,19 @@ const Item = {
     
   },
   getById:(id,callback)=>{
-    const love="SELECT * FROM item JOIN usertable ON item.sellerid = usertable.userid WHERE item.itemno = $1 ";
+    const query = `
+  SELECT 
+    item.*, 
+    usertable.username, 
+    usertable.hostelno, 
+    usertable.roomno, 
+    usertable.userdept, 
+    usertable.usercourse 
+  FROM item 
+  JOIN usertable ON item.sellerid = usertable.userid 
+  WHERE item.itemno = $1`;
     
-    pool.query(love,[id],callback);
+    pool.query(query,[id],callback);
   }
 };
 

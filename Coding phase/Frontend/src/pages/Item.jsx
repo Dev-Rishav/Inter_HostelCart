@@ -3,10 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { addItem } from '../Redux/cartSlice';
+import { useDispatch } from 'react-redux';
+
 const Item = () => {
+  const dispatch = useDispatch();
   const [item, setItem] = useState({});
   const { itemid } = useParams();
   
+  console.log(itemid);
   
   const fetchitem=async()=>{
      try {
@@ -43,6 +48,11 @@ const Item = () => {
       const handleReportClick = () => {
         alert('this item is reported');
       };
+
+      const handleAddToCart = () => {
+        dispatch(addItem(item));
+      }
+
   return (
     
     <div class="bg-gray-100">
@@ -73,7 +83,7 @@ const Item = () => {
 
         <div class="flex space-x-4 mb-6">
           <button
-                        class="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        class="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onClick={handleAddToCart}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             strokeWidth="1.5" stroke="currentColor" class="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round"

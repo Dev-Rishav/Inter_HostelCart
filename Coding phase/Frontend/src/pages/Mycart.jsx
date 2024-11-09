@@ -6,7 +6,7 @@ import { removeItem, clearCart } from '../Redux/cartSlice';
 const Mycart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
-  // console.log("huhds",cartItems);
+  console.log("huhds",cartItems);
   
   const totalAmount = useSelector(state => state.cart.totalAmount);
 
@@ -35,7 +35,7 @@ const Mycart = () => {
                       </a>
                       <div className="flex items-center justify-between md:order-3 md:justify-end">
                         <div className="text-end md:order-4 md:w-32">
-                          <p className="text-base font-bold text-gray-900">price - ${item.price}</p>
+                          <p className="text-base font-bold text-gray-900">price : ₹{item.price}</p>
                         </div>
                       </div>
                       <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
@@ -65,24 +65,24 @@ const Mycart = () => {
                   <div className="space-y-2">
                     <dl className="flex items-center justify-between gap-4">
                       <dt className="text-base font-normal text-gray-500">Original price</dt>
-                      <dd className="text-base font-medium text-gray-900">${totalAmount}</dd>
+                      <dd className="text-base font-medium text-gray-900">₹{totalAmount}</dd>
                     </dl>
                     <dl className="flex items-center justify-between gap-4">
                       <dt className="text-base font-normal text-gray-500">Savings</dt>
-                      <dd className="text-base font-medium text-green-600">-$0</dd>
+                      <dd className="text-base font-medium text-green-600">₹0</dd>
                     </dl>
                     <dl className="flex items-center justify-between gap-4">
                       <dt className="text-base font-normal text-gray-500">Store Pickup</dt>
-                      <dd className="text-base font-medium text-gray-900">$0</dd>
+                      <dd className="text-base font-medium text-gray-900">₹0</dd>
                     </dl>
                     <dl className="flex items-center justify-between gap-4">
                       <dt className="text-base font-normal text-gray-500">Tax</dt>
-                      <dd className="text-base font-medium text-gray-900">$0</dd>
+                      <dd className="text-base font-medium text-gray-900">₹0</dd>
                     </dl>
                   </div>
                   <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
                     <dt className="text-base font-bold text-black">Total</dt>
-                    <dd className="text-base font-bold text-red-600">${totalAmount}</dd>
+                    <dd className="text-base font-bold text-red-600">₹{totalAmount}</dd>
                   </dl>
                 </div>
                 <Link to="/" className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-black hover:bg-gray-300 border border-gray-400">Proceed to Checkout</Link>

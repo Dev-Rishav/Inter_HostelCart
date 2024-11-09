@@ -11,19 +11,19 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action) {
       const newItem = action.payload;
-    //   console.log("payload",newItem);
+      console.log("payload",newItem);
       
       const existingItem = state.items.find(item => item.id === newItem.id);
       if (!existingItem) {
         state.items.push({
-          id: newItem.id,
-          name: newItem.name,
-          price: newItem.price,
+          id: newItem.itemno,
+          name: newItem.itemname,
+          price: newItem.itemprice,
           quantity: 1,
-          totalPrice: newItem.price,
-          profileImg: newItem.imageurl,
+          totalPrice: newItem.itemprice,
+          profileImg: newItem.itemphotourl,
         });
-        state.totalAmount += newItem.price;
+        state.totalAmount += newItem.itemprice;
       } else {
         alert('Item already in cart');
       }

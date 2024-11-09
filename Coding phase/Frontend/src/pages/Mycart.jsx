@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeItem, clearCart, fetchCartItems } from '../Redux/cartSlice';
+import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const Mycart = () => {
@@ -13,16 +14,22 @@ const Mycart = () => {
   useEffect(() => {
     if (token) {
       dispatch(fetchCartItems());
-      // console.log("yes");
-      
     }
   }, [dispatch, token]);
 
-  // console.log("cartItems",cartItems);
-  
-
-  const handleRemoveItem = (id) => {
-    dispatch(removeItem(id));
+  const handleRemoveItem = async (id) => {
+    try {
+      await axios.delete('http://localhost:3001/api/cart/remove', {
+        data: { itemId: id },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(removeItem(id));
+    } catch (error) {
+      console.error('Error removing item from cart:', error);
+      alert('Failed to remove item from cart');
+    }
   };
 
   const handleClearCart = () => {
@@ -61,7 +68,7 @@ const Mycart = () => {
                     <div key={item.itemno} className="rounded-lg border border-gray-300 bg-white p-4 shadow-xl md:p-6">
                       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                         <a href="#" className="shrink-0 md:order-1">
-                          <img className="h-20 w-20" src={item.itemphotourl} alt={item.name} />
+                          <img className="h-20 w-20" src={item.itemphotourl} alt={item.itemname} />
                         </a>
                         <div className="flex items-center justify-between md:order-3 md:justify-end">
                           <div className="text-end md:order-4 md:w-32">

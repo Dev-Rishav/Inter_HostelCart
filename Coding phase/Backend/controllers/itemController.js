@@ -59,8 +59,20 @@ const itemController = {
       }
       
       
+      
       res.send(result);
     });
+  },
+  getItemById:(req,res)=>{
+      const id=req.params;
+      
+       Item.getById(id.id,(err,result)=>{
+        if(err){
+          console.error('Error executing query:', err);
+          return res.status(500).json({ error: err.message });
+        }
+        res.send(result);
+      })
   }
 };
 

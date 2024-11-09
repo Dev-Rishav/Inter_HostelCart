@@ -6,9 +6,9 @@ const UnifiedSection = ({ gender,tag }) => {
   const [sectionTitle, setSectionTitle] = useState('');
  
   const navigate=useNavigate();
-   const handleDivClick = () => {
+   const handleDivClick = (itemid) => {
     
-     navigate(`/item`); // Navigate to (`/other/${userId}`); route
+     navigate(`/item/${itemid}`); // Navigate to (`/other/${userId}`); route
    };
 
   // console.log(tag); 
@@ -68,9 +68,11 @@ const UnifiedSection = ({ gender,tag }) => {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
           {items.map(item => (
-            <div key={item.itemno}  className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105" onClick={handleDivClick}>
+            <div key={item.itemno}  className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105" onClick={()=>handleDivClick(item.itemno)}>
               <img src={item.itemphotourl} alt={item.itemname}  className="w-full h-56 object-cover" />
               <div className="p-6">
+                {/* console.log(item); */}
+                
                 <h2 className="text-2xl font-semibold mb-2 text-gray-800">{item.itemname}</h2>
                 <p className="text-gray-600 mb-4">{item.itemdescription}</p>
                 <p className="text-gray-600 mb-4">Price: ₹{item.itemprice}</p>

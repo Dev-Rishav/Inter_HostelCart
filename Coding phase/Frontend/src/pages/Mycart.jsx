@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeItem, clearCart } from '../Redux/cartSlice';
+import { removeItem, clearCart, fetchCartItems } from '../Redux/cartSlice';
 import Cookies from 'js-cookie';
 
 const Mycart = () => {
@@ -9,6 +9,17 @@ const Mycart = () => {
   const cartItems = useSelector(state => state.cart.items);
   const totalAmount = useSelector(state => state.cart.totalAmount);
   const token = Cookies.get('token');
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchCartItems());
+      // console.log("yes");
+      
+    }
+  }, [dispatch, token]);
+
+  // console.log("cartItems",cartItems);
+  
 
   const handleRemoveItem = (id) => {
     dispatch(removeItem(id));
@@ -47,23 +58,23 @@ const Mycart = () => {
               <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
                 <div className="space-y-6">
                   {cartItems.map(item => (
-                    <div key={item.id} className="rounded-lg border border-gray-300 bg-white p-4 shadow-xl md:p-6">
+                    <div key={item.itemno} className="rounded-lg border border-gray-300 bg-white p-4 shadow-xl md:p-6">
                       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                         <a href="#" className="shrink-0 md:order-1">
-                          <img className="h-20 w-20" src={item.profileImg} alt={item.name} />
+                          <img className="h-20 w-20" src={item.itemphotourl} alt={item.name} />
                         </a>
                         <div className="flex items-center justify-between md:order-3 md:justify-end">
                           <div className="text-end md:order-4 md:w-32">
-                            <p className="text-base font-bold text-gray-900">price : ₹{item.price}</p>
+                            <p className="text-base font-bold text-gray-900">price : ₹{item.itemprice}</p>
                           </div>
                         </div>
                         <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                          <Link to="/" className="text-base font-medium text-gray-900 hover:underline">{item.name}</Link>
+                          <Link to="/" className="text-base font-medium text-gray-900 hover:underline">{item.itemname}</Link>
                           <div className="items-center">
                             <button
                               type="button"
                               className="p-2 inline-flex items-center text-sm font-medium text-red-600 hover:underline border-red-800 hover:border rounded-md"
-                              onClick={() => handleRemoveItem(item.id)}
+                              onClick={() => handleRemoveItem(item.itemno)}
                             >
                               <svg className="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 17.94 6M18 18 6.06 6" />

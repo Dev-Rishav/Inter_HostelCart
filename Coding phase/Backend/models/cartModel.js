@@ -27,11 +27,7 @@ const Cart = {
     pool.query(sqlDelete, [userId, itemId], callback);
   },
 
-  // Update the quantity of an item in the cart
-  updateItemQuantity: (userId, itemId, quantity, callback) => {
-    const sqlUpdate = "UPDATE cart SET quantity = $3 WHERE userid = $1 AND itemid = $2";
-    pool.query(sqlUpdate, [userId, itemId, quantity], callback);
-  }
+ //
 };
 
 module.exports = Cart;

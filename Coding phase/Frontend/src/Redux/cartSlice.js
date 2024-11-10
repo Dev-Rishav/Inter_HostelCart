@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const initialState = {
-  items: [],
+  cart: { items: [] },
   totalAmount: 0,
   status: 'idle',
   error: null,
@@ -16,7 +16,9 @@ export const fetchCartItems = createAsyncThunk('cart/fetchCartItems', async () =
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  });  
+  });
+  // console.log("yes",response.data);
+  
   return response.data;
 });
 
@@ -26,28 +28,33 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action) {
       const newItem = action.payload;
-      const existingItem = state.items.find(item => item.id === newItem.id);
+      const existingItem = state.cart.items.find(item => item.itemno === newItem.itemno);
       if (!existingItem) {
-        state.items.push({
-          id: newItem.id,
-          name: newItem.name,
-          price: newItem.price,
+        state.cart.items.push({
+          itemno: newItem.itemno,
+          itemname: newItem.itemname,
+          itemprice: newItem.itemprice,
+          itemphotourl: newItem.itemphotourl,
           quantity: 1,
-          totalPrice: newItem.price,
+          totalPrice: newItem.itemprice,
         });
+        state.totalAmount += newItem.itemprice;
+        alert('Item added to cart successfully');
       }
-      state.totalAmount += newItem.price;
+      else{
+        alert('Item already in cart');
+      }
     },
     removeItem(state, action) {
-      const id = action.payload;
-      const existingItem = state.items.find(item => item.id === id);
+      const itemno = action.payload;
+      const existingItem = state.cart.items.find(item => item.itemno === itemno);
       if (existingItem) {
-        state.totalAmount -= existingItem.price;
-        state.items = state.items.filter(item => item.id !== id);
+        state.totalAmount -= existingItem.itemprice;
+        state.cart.items = state.cart.items.filter(item => item.itemno !== itemno);
       }
     },
     clearCart(state) {
-      state.items = [];
+      state.cart.items = [];
       state.totalAmount = 0;
     },
   },
@@ -57,10 +64,8 @@ const cartSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchCartItems.fulfilled, (state, action) => {
-        // console.log("payload",action.payload);
-        
         state.status = 'succeeded';
-        state.items = action.payload;
+        state.cart.items = action.payload;
         state.totalAmount = action.payload.reduce((total, item) => total + item.itemprice, 0);
       })
       .addCase(fetchCartItems.rejected, (state, action) => {

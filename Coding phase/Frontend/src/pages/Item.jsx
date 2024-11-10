@@ -54,7 +54,6 @@ const Item = () => {
         }
       );
       dispatch(addItem(item));
-      alert('Item added to cart successfully');
     } catch (error) {
       console.error('Error adding item to cart:', error);
       alert('Failed to add item to cart');

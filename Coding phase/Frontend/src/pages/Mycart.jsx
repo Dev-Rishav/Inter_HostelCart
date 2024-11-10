@@ -7,10 +7,11 @@ import Cookies from 'js-cookie';
 
 const Mycart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector(state => state.cart.items);
+  const cartItems = useSelector(state => state.cart.cart.items);
   const totalAmount = useSelector(state => state.cart.totalAmount);
   const token = Cookies.get('token');
-
+  // console.log("cartItenms",cartItems);
+  
   useEffect(() => {
     if (token) {
       dispatch(fetchCartItems());
@@ -26,6 +27,7 @@ const Mycart = () => {
         },
       });
       dispatch(removeItem(id));
+      alert('Item removed from cart successfully');
     } catch (error) {
       console.error('Error removing item from cart:', error);
       alert('Failed to remove item from cart');

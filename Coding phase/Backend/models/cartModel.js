@@ -23,7 +23,7 @@ const Cart = {
 
   // Remove an item from the cart
   removeItem: (userId, itemId, callback) => {
-    const sqlDelete = "DELETE FROM cart WHERE userid = $1 AND itemid = $2";
+    const sqlDelete = "DELETE FROM cart WHERE buyerid = $1 AND itemno = $2";
     pool.query(sqlDelete, [userId, itemId], callback);
   },
 

@@ -26,6 +26,18 @@ const cartController = {
       res.status(200).json(result.rows);
     });
   },
+  removeItemFromCart: (req, res) => {
+    const userId = req.user.userId;
+    const { itemId } = req.body;
+
+    Cart.removeItem(userId, itemId, (err, result) => {
+      if (err) {
+        console.error('Error removing item from cart:', err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Item removed from cart successfully' });
+    });
+  }
 };
 
 module.exports = cartController;

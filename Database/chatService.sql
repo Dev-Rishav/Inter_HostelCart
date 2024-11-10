@@ -20,3 +20,9 @@ INSERT INTO chatService (senderID,receiverID,itemNO,messageTime,messageContent,r
 	 (9,6,14,'2024-04-19 10:21:00','How far are we?',false),
 	 (10,5,15,'2024-04-21 11:21:00','lets do it!',false);
 	
+
+        alter table chatservice 
+    alter column messageContent type text;
+
+alter table chatservice 
+     add column room varchar(200);

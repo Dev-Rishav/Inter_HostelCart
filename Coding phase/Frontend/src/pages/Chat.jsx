@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-const socket = io('http://localhost:3001'); 
+const socket = io('http://localhost:3001'); // Replace with your backend's URL
 
-const Chat = ({ room }) => {
+const Chat = ({ room, user }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
@@ -14,6 +16,17 @@ const Chat = ({ room }) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
+    const fetchMessages = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/api/chat/${room}`);
+        setMessages(response.data.messages);
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+      }
+    };
+
+    fetchMessages();
+
     return () => {
       socket.off('receiveMessage');
     };
@@ -23,11 +36,14 @@ const Chat = ({ room }) => {
     const newMessage = {
       room,
       text: message,
-      sender: 'User1', // Replace with the actual sender's name or ID
+      sender: user,
     };
     socket.emit('sendMessage', newMessage);
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     setMessage('');
+
+    axios.post('http://localhost:3001/api/chat', newMessage)
+      .catch(error => console.error('Error saving message:', error));
   };
 
   return (

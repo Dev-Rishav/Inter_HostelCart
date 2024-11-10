@@ -7,6 +7,8 @@ const itemRoutes = require('./routes/itemRoutes');
 const userRoutes = require('./routes/userRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const chatRoutes = require('./routes/chatRoutes');
+
 
 const { Server } = require('socket.io');
 
@@ -32,6 +34,7 @@ app.use('/api/items', itemRoutes);
 app.use("/api/user",userRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/chat', chatRoutes);
 
 app.get('/', (req, res) => {
   res.send('From backend');

@@ -16,7 +16,7 @@ const orderController = {
 
   getUserOrders: (req, res) => {
     const userId = req.user.userId;
-
+    
     Order.findByUserId(userId, (err, result) => {
       if (err) {
         console.error('Error retrieving orders:', err);

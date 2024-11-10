@@ -3,6 +3,7 @@ function ReportList({ reports, onVerify })
   if(!Array.isArray(reports)) {
     return <p>No reports found.</p>;
   }
+  
     return (
       <div className="space-y-4 mt-6">
         <ul>

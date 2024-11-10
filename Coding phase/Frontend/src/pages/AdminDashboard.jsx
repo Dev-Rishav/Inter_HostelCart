@@ -47,7 +47,8 @@ function AdminDashboard() {
   };
 
   const verifyReport = async (reportId) => {                             //mark report as verified
-    await axios.put(`/api/reports/${reportId}/verify`);
+    await axios.put(`http://localhost:3001/api/items/report/item/atul/${reportId}`);
+    
     fetchReports(); 
   };
 

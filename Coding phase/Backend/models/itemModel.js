@@ -57,6 +57,11 @@ const Item = {
         });
       }
     });
+  },
+  removeById:(id,callback)=>{
+
+    const query="DELETE FROM item  WHERE itemno = $1 ";
+    pool.query(query,[id],callback);
   }
 };
 

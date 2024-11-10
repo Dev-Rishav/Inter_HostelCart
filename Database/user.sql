@@ -1,5 +1,5 @@
 CREATE TABLE userTable (
-    userID SERIAL,
+    userID SERIAL PRIMARY KEY,
     emailID VARCHAR(30) UNIQUE NOT NULL,
     hostelNo INT NOT NULL,
     roomNo INT NOT NULL,

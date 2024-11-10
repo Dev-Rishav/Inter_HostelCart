@@ -40,7 +40,7 @@ const authController = {
       }
 
       const user = result.rows[0];
-      console.log(result.rows);
+      // console.log(result.rows);
       
       bcrypt.compare(password, user.userpassword, (err, isMatch) => {
         if (err) {
@@ -54,7 +54,7 @@ const authController = {
         
         
         const token = jwt.sign({ userId: user.userid }, secretKey, { expiresIn: '1h' });
-        console.log("token generated",token);
+        // console.log("token generated",token);
         res.json({ token });
       });
     });

@@ -15,19 +15,10 @@ const userController = {
       if (userResult.length === 0) {
         return res.status(404).json({ error: 'User not found' });
       }
-
-      // Cart.findByUserId(userId, (err, cartResult) => {
-      //   if (err) {
-      //     console.error('Error executing query:', err);
-      //     return res.status(500).json({ error: 'Internal server error' });
-      //   }
-    // console.log("here",userResult.rows);
     
         res.json({
           user: userResult.rows[0]
-          // cart: cartResult
         });
-      // });
     });
   },
 

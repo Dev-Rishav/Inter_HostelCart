@@ -120,13 +120,23 @@ const AddItem = () => {
       </div>
       <div className="mb-4">
         <label className="block text-sm">Item Tags</label>
-        <input
+        {/* <input
           type="text"
           name="itemTags"
           value={formData.itemTags}
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded-lg"
-        />
+        /> */}
+        <select id="options" name="itemTags" onChange={handleChange}
+          className="w-full px-4 py-2 border rounded-lg">
+          <option value="clothing">Clothings</option>
+          <option value="electronics">Electronics</option>
+          <option value="stationary">Stationary</option>
+          <option value="vehicle">Vehicle</option>
+          <option value="sport">Sport</option>
+          <option value="medicine">Medicine</option>
+          <option value="accessories">Accessories</option>
+        </select>
       </div>
       <div className="mb-4">
         <label className="block text-sm">Item Photo</label>

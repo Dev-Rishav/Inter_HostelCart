@@ -1,3 +1,3 @@
-INSERT INTO userTable (emailID, hostelNo, roomNo, userName, userDOB, userPhoneNo, userPassword, userDept, userCourse) VALUES
- ('2320403203@stu.manit.ac.in', 9, 9003, 'Atul', '2002-10-26', 93993566543, 'atul1234', 'ME', 'B.Tech'),
-    ('2320403208@stu.manit.ac.in', 9, 9025, 'Risu Kumar Gupta', '2001-01-01', 9798571743, 'I am risu', 'MBC', 'MCA');
+INSERT INTO item (sellerID,itemName,itemPrice,itemDescription,itemTags,listingDate,reportflag,itemVisit,itemPhotoURL,gender) VALUES
+	 (1,'stone',695654,' jhdbah bdabd jabc a','test','2024-09-24',true,2,'https://firebasestorage.googleapis.com/v0/b/interhostel-cart.appspot.com/o/images%2Ftorii-gate-japanese-5120x7244-15297.jpg?alt=media&token=83c59cb8-31fa-4b3c-bd41-0cfe800b287c','he'),
+	 (1,'pakora',454,'dadawdadszdsdca','adad','2024-09-24',true,3,'https://firebasestorage.googleapis.com/v0/b/interhostel-cart.appspot.com/o/images%2Fdeadpool-vs-wolverine-yellow-background-desktop-wallpaper-4k.jpg?alt=media&token=36ceee2d-7051-421a-9b29-16ac2bb191f2','she');

@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const socket = io('http://localhost:3001'); // Replace with your backend's URL
+const socket = io('http://localhost:3001/api/chat'); // Replace with your backend's URL
 
 const Chat = ({ room, user }) => {
   const [message, setMessage] = useState('');

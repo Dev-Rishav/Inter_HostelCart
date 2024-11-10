@@ -35,6 +35,28 @@ const Item = {
   WHERE item.itemno = $1`;
     
     pool.query(query,[id],callback);
+  },
+  reportItem: (itemId, callback) => {
+    const sqlSelect = "SELECT reportflag FROM item WHERE itemno = $1";
+    pool.query(sqlSelect, [itemId], (err, result) => {
+      if (err) {
+        return callback(err);
+      }
+      
+      if (result.rows.length > 0 && result.rows[0].reportflag) {
+        // console.log("result",result.rows[0].reportflag);
+        return callback(null, { message: 'Item has already been reported' });
+      } else {
+        const sqlUpdate = "UPDATE item SET reportflag = true WHERE itemno = $1";
+        pool.query(sqlUpdate, [itemId], (err, result) => {
+          if (err) {
+            return callback(err);
+          }
+          return callback(null, { message: 'Item reported successfully' });
+          
+        });
+      }
+    });
   }
 };
 

@@ -74,6 +74,17 @@ const itemController = {
         }
         res.send(result);
       })
+  },
+  reportItem: (req, res) => {
+    const { itemId } = req.body;
+
+    Item.reportItem(itemId, (err, result) => {
+      if (err) {
+        console.error('Error reporting item:', err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+      res.status(200).json(result);
+    });
   }
 };
 

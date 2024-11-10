@@ -34,3 +34,9 @@ INSERT INTO userTable (emailID, hostelNo, roomNo, userName, userDOB, userPhoneNo
  ('2320403203@stu.manit.ac.in', 9, 9003, 'Atul', '2002-10-26', 9399356355, 'atul1234', 'ME', 'B.Tech'),
     ('2320403208@stu.manit.ac.in', 9, 9025, 'Risu Kumar Gupta', '2001-01-01', 9798571703, 'I am risu', 'MBC', 'MCA');
     
+
+    alter table usertable 
+add column reported boolean;
+
+update usertable set reported='false';
+select * from usertable u ;

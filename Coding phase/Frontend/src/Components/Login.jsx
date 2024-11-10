@@ -3,11 +3,12 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import axios from "axios";
 import Cookies from "js-cookie";
 import img from "../assets/login.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,10 +18,14 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3001/api/auth/login", formData);
-      const { token } = response.data;
-      Cookies.set("token", token, { expires: 1 }); // Set cookie to expire in 1 day      
-      // Redirect to a protected route or dashboard
-      window.location.href = "/profile";
+      const { token, admin } = response.data;
+      Cookies.set("token", token, { expires: 1 }); // Set cookie to expire in 1 day
+      // Navigate to admin or home page based on admin flag
+      if (admin) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       setError("Invalid email or password");
     }

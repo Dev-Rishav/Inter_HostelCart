@@ -17,7 +17,7 @@ import Signup from './Components/Signup';
 import Mycart from './pages/Mycart';
 import Item from './pages/Item';
 import AdminDashboard from './pages/AdminDashboard';
-// import Chat from './pages/Chat';
+import Chat from './pages/Chat';
 function App() {
 
 
@@ -46,7 +46,7 @@ function App() {
           <Route path="/mycart" element={<Mycart />} />
           <Route path="/item/:itemid" element={<Item />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          {/* <Route path="/chat" element={<Chat />} /> */}
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </Layout>
     </Router>

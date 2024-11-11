@@ -17,8 +17,8 @@ import Signup from './Components/Signup';
 import Mycart from './pages/Mycart';
 import Item from './pages/Item';
 import AdminDashboard from './pages/AdminDashboard';
-import Chat from './pages/Chat';
 import Auction from './pages/Auction';
+import Myitem from './Components/Myitem';
 function App() {
 
 
@@ -48,6 +48,7 @@ function App() {
           <Route path="/item/:itemid" element={<Item />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/auction" element={<Auction />} />
+          <Route path="/myitem" element={<Myitem />} />
         </Routes>
       </Layout>
     </Router>

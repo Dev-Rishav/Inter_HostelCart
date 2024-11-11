@@ -98,6 +98,14 @@ return (
             </li>
             <li>
               <NavLink
+                to="/myitem"
+                className="block py-2 px-4 hover:bg-gray-100"
+              >
+                My Items
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/payment"
                 className="block py-2 px-4 hover:bg-gray-100"
               >

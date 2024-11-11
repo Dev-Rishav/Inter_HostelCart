@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-
+import h1 from "../assets/h1.jpg";
+import h2 from "../assets/h2.jpg";
+import h4 from "../assets/h4.jpg";
+import h6 from "../assets/h6.jpg";
+import h7 from "../assets/h7.jpg";
+import h8 from "../assets/h8.avif";
+import h9 from "../assets/h9.jpg";
+import h10 from "../assets/h10.jpg";
+import h12 from "../assets/h12.jpg";
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Array of image URLs
-  const images = [
-    "https://mdbcdn.b-cdn.net/img/new/slides/041.webp",
-    "https://mdbcdn.b-cdn.net/img/new/slides/042.webp",
-    "https://mdbcdn.b-cdn.net/img/new/slides/043.webp",
-  ];
+  const images = [(h1),(h2),(h4),(h6),(h7),(h8),(h9),(h10),(h12)];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,7 +24,7 @@ const Carousel = () => {
   }, [images.length]);
 
   return (
-    <div className="relative w-full max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg">
+    <div className="relative w-full max-w-md h-md mx-auto overflow-hidden rounded-lg shadow-lg">
       <div className="carousel">
         {images.map((image, index) => (
           <div

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef,useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
 import Carousel from "./Carousel"
 import { gsap } from "gsap";
 import {getItems } from '../api';

@@ -24,3 +24,10 @@ INSERT INTO orderHistory (buyerId, itemNO, sellerID, orderDate, status) VALUES
 
 -- Select all data from the orderHistory table
 SELECT * FROM orderHistory;
+
+
+  alter table orderhistory add column totalamount ;
+    
+    select * from item;
+   ALTER TABLE orderhistory;
+ALTER COLUMN totalamount TYPE DECIMAL(10, 2);

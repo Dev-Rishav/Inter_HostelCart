@@ -4,7 +4,7 @@ const Deal=()=>{
     return(
        <div>
          <Hero/> 
-         <Product/> 
+         {/* <Product/>  */}
          
        </div>
 

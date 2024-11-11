@@ -1,18 +1,13 @@
 import React, { useEffect } from 'react';
 import { FaTelegramPlane, FaMobileAlt, FaLinkedin, FaInstagram, FaFacebook, FaBell } from "react-icons/fa";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+
 
 const Footer = () => {
-  useEffect(() => {
-    AOS.init();
-  }, []);
+ 
 
-  const aosDelay = "100";  
+   
   return (
     <footer 
-      data-aos="fade-bottom"
-      data-aos-delay={aosDelay}
       className="py-5 bg-gray-800"
     >
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -21,7 +16,7 @@ const Footer = () => {
           <ul className="space-y-2">
             <li><a href="#" className="text-gray-300 hover:text-gray-100">Home</a></li>
             <li><a href="#" className="text-gray-300 hover:text-gray-100">Chats</a></li>
-            <li><a href="#" className="text-gray-300 hover:text-gray-100">Newsletter</a></li>
+            <li><a href="#" className="text-gray-300 hover:text-gray-100">profile</a></li>
             <li><a href="#" className="text-gray-300 hover:text-gray-100">FAQs</a></li>
             <li><a href="#" className="text-gray-300 hover:text-gray-100">About</a></li>
           </ul>

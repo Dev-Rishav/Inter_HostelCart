@@ -10,8 +10,14 @@ const Myitem = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      const token = Cookies.get('token');
+      if (!token) {
+        setError('Please sign in to view your added items');
+        setLoading(false);
+        return;
+      }
+
       try {
-        const token = Cookies.get('token');
         const response = await axios.get('http://localhost:3001/api/user/profile', {
           headers: {
             authorization: `Bearer ${token}`
@@ -21,6 +27,7 @@ const Myitem = () => {
       } catch (error) {
         console.error('Error fetching user:', error);
         setError('Failed to fetch user profile');
+        setLoading(false);
       }
     };
 

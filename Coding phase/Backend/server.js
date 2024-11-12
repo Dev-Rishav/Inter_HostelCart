@@ -9,6 +9,7 @@ const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const auctionRoutes = require('./routes/auctionRoutes');
+const hostelRoutes = require('./routes/hostelRoutes');
 
 const { Server } = require('socket.io');
 
@@ -35,6 +36,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/hostel',hostelRoutes);
 app.use('/api/auctions', auctionRoutes(io)); // Pass io instance to auction routes
 
 app.get('/', (req, res) => {

@@ -62,7 +62,19 @@ const Item = {
 
     const query="DELETE FROM item  WHERE itemno = $1 ";
     pool.query(query,[id],callback);
-  }
+  },
+  getByHostel:(tag,callback)=>{
+    const sqlGet = `
+    SELECT item.* 
+    FROM item
+    JOIN usertable ON item.sellerid = usertable.userid
+    WHERE usertable.hostelno = $1;
+  `;
+    
+    pool.query(sqlGet,[tag.hostel],callback);
+  
+    
+  },
 };
 
 module.exports = Item;

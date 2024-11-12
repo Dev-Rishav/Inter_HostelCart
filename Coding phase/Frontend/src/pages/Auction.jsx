@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:3001'); // Replace with your backend's URL
 
-const Auction = ({ itemno=12 }) => {
+const Auction = () => {
+  const location = useLocation();
+  const { itemno } = location.state || {};
+  console.log(itemno);
+  
   const navigate = useNavigate();
   const [auction, setAuction] = useState({});
   const [bids, setBids] = useState([]);
   const [bidAmount, setBidAmount] = useState('');
   const token = Cookies.get('token');
   const userId = 1; // Replace with actual user ID
-  const isSeller = true; // Replace with logic to check if the user is the seller
+  const isSeller = false; // Replace with logic to check if the user is the seller
 
   useEffect(() => {
     const fetchAuction = async (auctionId) => {

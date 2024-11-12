@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 
@@ -15,17 +15,15 @@ const Auction = () => {
   const [auction, setAuction] = useState({});
   const [bids, setBids] = useState([]);
   const [bidAmount, setBidAmount] = useState('');
+  const [isSeller, setIsSeller] = useState(false);
   const token = Cookies.get('token');
-  const userId = 1; // Replace with actual user ID
-  const isSeller = false; // Replace with logic to check if the user is the seller
+  const userId = 2; // Replace with actual user ID
 
   useEffect(() => {
     const fetchAuction = async (auctionId) => {
       try {
         const response = await axios.get(`http://localhost:3001/api/auctions/${auctionId}`);
         setAuction(response.data.auction);
-        // console.log(response.data.auction);
-        
       } catch (error) {
         console.error('Error fetching auction:', error);
       }
@@ -34,10 +32,7 @@ const Auction = () => {
     const fetchBids = async (auctionId) => {
       try {
         const response = await axios.get(`http://localhost:3001/api/auctions/${auctionId}/bids`);
-        // console.log(response.data.bids);
-        
         setBids(response.data.bids);
-
       } catch (error) {
         console.error('Error fetching bids:', error);
       }
@@ -65,7 +60,7 @@ const Auction = () => {
     const fetchAuctionId = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/auctions/item/${itemno}`);
-        const auctionId = response.data.auctionId;        
+        const auctionId = response.data.auctionId;
         fetchAuction(auctionId);
         fetchBids(auctionId);
         socket.emit('joinAuction', auctionId);
@@ -78,7 +73,24 @@ const Auction = () => {
       }
     };
 
+    const checkIfSeller = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/api/items/great/atul/${itemno}`);
+        const item = response.data.rows[0];
+        // console.log(response.data.rows[0], "item");
+
+        if (item && item.sellerid === userId) {
+          setIsSeller(true);
+        } else {
+          setIsSeller(false);
+        }
+      } catch (error) {
+        console.error('Error checking if user is seller:', error);
+      }
+    };
+
     fetchAuctionId();
+    checkIfSeller();
 
     socket.on('newBid', (bid) => {
       setBids((prevBids) => [bid, ...prevBids]);
@@ -87,7 +99,7 @@ const Auction = () => {
     return () => {
       socket.off('newBid');
     };
-  }, [itemno, token]);
+  }, [itemno, token, userId]);
 
   const handleBid = async () => {
     if (!token) {
@@ -96,8 +108,6 @@ const Auction = () => {
     }
 
     try {
-        // console.log(auction.auctionid, userId, bidAmount);
-        
       const response = await axios.post(
         'http://localhost:3001/api/auctions/new/bid',
         { auctionId: auction.auctionid, userId, bidAmount },

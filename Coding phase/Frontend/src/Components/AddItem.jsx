@@ -85,7 +85,7 @@ const AddItem = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 bg-yellow-50 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Add Item for Selling</h2>
       {error && <div className="mb-4 text-red-500">{error}</div>}
       {success && <div className="mb-4 text-green-500">{success}</div>}
@@ -149,7 +149,7 @@ const AddItem = () => {
       </div>
       <button
         onClick={handleAddItem}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+        className="bg-blue-950 text-white px-4 py-2 rounded-lg"
         disabled={loading}
       >
         {loading ? 'Adding...' : 'Add Item'}

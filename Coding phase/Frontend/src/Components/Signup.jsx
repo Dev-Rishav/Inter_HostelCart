@@ -50,13 +50,13 @@ const Signup = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#F8F4E1] to-[#E8DFC7] min-h-screen">
-      <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden max-w-4xl w-full">
+      <div className="flex items-center justify-center min-h-[calc(120vh-64px)]">
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden max-w-5xl w-full">
           <div className="flex flex-col md:flex-row">
             <div className="w-full md:w-1/2 p-10">
               <h2 className="text-4xl font-bold text-[#543310] mb-8">Create Account</h2>
               {error && <p className="text-red-500">{error}</p>}
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6 ">
                 <div className="relative">
                   <FaEnvelope className="absolute top-3 left-3 text-gray-400" />
                   <input
@@ -65,7 +65,7 @@ const Signup = () => {
                     placeholder="Email"
                     onChange={handleChange}
                     value={formData.emailid}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <div className="relative">
@@ -76,7 +76,7 @@ const Signup = () => {
                     placeholder="Hostel Number"
                     onChange={handleChange}
                     value={formData.hostelno}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <div className="relative">
@@ -87,7 +87,7 @@ const Signup = () => {
                     placeholder="Room Number"
                     onChange={handleChange}
                     value={formData.roomno}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <div className="relative">
@@ -98,7 +98,7 @@ const Signup = () => {
                     placeholder="Username"
                     onChange={handleChange}
                     value={formData.username}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <div className="relative">
@@ -109,7 +109,7 @@ const Signup = () => {
                     placeholder="Date of Birth"
                     onChange={handleChange}
                     value={formData.userdob}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border text-gray-400 border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <div className="relative">
@@ -120,7 +120,7 @@ const Signup = () => {
                     placeholder="Phone Number"
                     onChange={handleChange}
                     value={formData.userphoneno}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <div className="relative">
@@ -131,7 +131,7 @@ const Signup = () => {
                     placeholder="Password"
                     onChange={handleChange}
                     value={formData.userpassword}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <div className="relative">
@@ -142,7 +142,7 @@ const Signup = () => {
                     placeholder="Department"
                     onChange={handleChange}
                     value={formData.userdept}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <div className="relative">
@@ -153,7 +153,7 @@ const Signup = () => {
                     placeholder="Course"
                     onChange={handleChange}
                     value={formData.usercourse}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#a78059] transition duration-300"
                   />
                 </div>
                 <button
@@ -173,7 +173,7 @@ const Signup = () => {
               </div>
             </div>
             <div className="hidden md:block w-1/2">
-              <img src={img} alt="signup" className="object-cover w-full h-full" />
+              <img src={img} alt="signup" className="object-cover  w-full h-screen" />
             </div>
           </div>
         </div>

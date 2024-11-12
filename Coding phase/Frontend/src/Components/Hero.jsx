@@ -2,6 +2,8 @@ import React, { useEffect, useRef,useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import Carousel from "./Carousel"
 import { gsap } from "gsap";
+import manit from "../assets/Manit1.png"
+import { FaArrowRight } from 'react-icons/fa'
 
 
 const Hero = () => {
@@ -52,13 +54,13 @@ const Hero = () => {
     );
   }, []);
     return (
-        <div className="w-11/12 xl:w-4/5 h-[350px] m-auto mt-8 bg-stone-200 rounded-xl" >
-            <div className="w-full h-full flex justify-center items-center">
-                <div className="w-11/12 xl:w-1/2 p-5 space-y-5">
-                    <h1 className="text-5xl font-semibold">
+        <div style={{ backgroundImage: `url(${manit})`}} className=" w-[1516px] h-[500px] m-auto mt-8 bg-stone-200 rounded-xl" >
+            <div className="w-full h-full flex justify-center items-center ml-96">
+                <div className="w-full 2xl:w-1/2 p-5 space-y-5">
+                    <h1 className="text-center text-5xl font-semibold">
                        
-                        <span ref={textRef} className="inline-block">
-                             {"Find the Perfect Product  Online".split("").map((letter, index) => (
+                        <span ref={textRef} className="inline-block text-black text-3xl">
+                             {" Find everything you need from fellow hostelers".split("").map((letter, index) => (
                             <span key={index} className="letter inline-block">
                                 {letter === " " ? "\u00A0" : letter}
                             </span>
@@ -69,25 +71,32 @@ const Hero = () => {
                         <AiOutlineSearch size={"1.2rem"} />
                         <input type="text" placeholder="Search..." className="outline-0 w-full" />
                     </div> */}
-                    <div  className="mb-4 ">
-                        <h1 className="text-4xl font-bold text-red-500 mb-2">
-                            <span ref={placeholderRef} className="inline-block">
-                                {"Search...".split("").map((letter, index) => (
+                    <div  className="m-8">
+                    <h1 className="text-2xl font-bold text-red-500 mb-2 ">
+                      <span ref={placeholderRef} className="inline-block">
+                        <div className="flex items-center group">
+                          <button className="bg-red-900 h-[40px] text-white ml-52 px-2 py-2 flex items-center space-x-2"> 
+                            <span>Explore Items</span>
+                            <FaArrowRight className="inline-block group-hover:translate-x-2 duration-200 text-base h-[20px] w-[20px] bg-red-900 text-white" />
+                          </button>
+                        </div>
+                      </span>
+                    </h1>
+
+                         {/* {"Search...".split("").map((letter, index) => (
                                 <span key={index} className="letter inline-block">
                                     {letter === " " ? "\u00A0" : letter}
                                 </span>
-                                ))}
-                            </span>
-                        </h1>
-
+                                ))} */}
                         {/* Search Input Field */}
-                        <input
+                        {/* <input
                             type="text"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             placeholder="Type your search here..."
                             className=" px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-800"
-                        />
+                        /> */}
+                        
                     </div>
 
                 </div>

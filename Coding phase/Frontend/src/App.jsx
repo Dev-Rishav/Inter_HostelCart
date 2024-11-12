@@ -16,6 +16,8 @@ import Item from './pages/Item';
 import AdminDashboard from './pages/AdminDashboard';
 import Auction from './pages/Auction';
 import Myitem from './Components/Myitem';
+import Hostelitem from './pages/Hostelitem';
+
 function App() {
 
 
@@ -46,6 +48,7 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/auction" element={<Auction />} />
           <Route path="/myitem" element={<Myitem />} />
+          <Route path="/hostel/:hostelno" element={<Hostelitem />} />
         </Routes>
       </Layout>
     </Router>

@@ -7,17 +7,29 @@ const itemRoutes = require('./routes/itemRoutes');
 const userRoutes = require('./routes/userRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const { Server } = require('socket.io');
+const mysql = require('mysql2');
 
-const User = require('./models/userModel'); 
+//const User = require('./models/userModel'); 
 
 const app = express();
 const server = require('http').createServer(app);
-const io = new Server(server, {
+const io = require('socket.io')(server, {
   cors: {
-    origin: 'http://localhost:5173', // Replace with your frontend's origin
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'] 
+      origin: "http://localhost:5173",
+      methods: ["GET", "POST"]
   }
+});
+
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+});
+
+db.connect((err) => {
+  if (err) throw err;
+  console.log("Connected to MySQL database!");
 });
 
 //* Middleware
@@ -40,21 +52,24 @@ app.get('/', (req, res) => {
 // WebSocket connection
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
+   
+  socket.on('user_connected', ({ userId }) => {
+    console.log(`User connected with ID: ${userId}`);
 
-   // Listen for user connection with userId
-   socket.on('user_connected', ({ userId, token }) => {
-    console.log(`User connected: ${userId}, token: ${token}`);
-
-    // Fetch username from the database using userId
-    User.findById(userId, (err, user) => {
+    // Fetch username from MySQL database using userId
+    const query = 'SELECT username FROM users WHERE id = ?';
+    db.query(query, [userId], (err, results) => {
       if (err) {
-        console.error("Error fetching user:", err);
+        console.error("Error fetching username:", err);
         return;
       }
-      if (user) {
+      if (results.length > 0) {
+        const username = results[0].username;
         // Emit the username back to the frontend
-        socket.emit('username', { username: user.username });
-        console.log('Username sent:', user.username);
+        socket.emit('username', { username });
+        console.log('Username sent:', username);
+      } else {
+        console.log('No user found with that ID');
       }
     });
   });

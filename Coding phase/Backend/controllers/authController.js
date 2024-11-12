@@ -5,18 +5,15 @@ const secretKey = process.env.SECRET_KEY;
 
 const authController = {
   signup: (req, res) => {
-    const { emailid,hostelno,roomno,username,userdob,userphoneno,userpassword,userdept,usercourse } = req.body;    
-    // console.log(email,hostel,room,username,dob,phone,password,dept,course);
-    
+    const { emailid, hostelno, roomno, username, userdob, userphoneno, userpassword, userdept, usercourse } = req.body;
 
     bcrypt.hash(userpassword, 10, (err, hash) => {
       if (err) {
-        // console.log(password);
         console.error('Error hashing password:', err);
         return res.status(500).json({ error: 'Internal server error' });
       }
 
-      User.create(emailid,hostelno,roomno,username,userdob,userphoneno,hash,userdept,usercourse, (err, result) => {
+      User.create(emailid, hostelno, roomno, username, userdob, userphoneno, hash, userdept, usercourse, (err, result) => {
         if (err) {
           console.error('Error executing query:', err);
           return res.status(500).json({ error: 'Internal server error' });
@@ -40,8 +37,7 @@ const authController = {
       }
 
       const user = result.rows[0];
-      // console.log(result.rows);
-      
+
       bcrypt.compare(password, user.userpassword, (err, isMatch) => {
         if (err) {
           console.error('Error comparing passwords:', err);
@@ -51,11 +47,9 @@ const authController = {
         if (!isMatch) {
           return res.status(401).json({ error: 'Invalid email or password' });
         }
-        
-        
-        const token = jwt.sign({ userId: user.userid }, secretKey, { expiresIn: '1h' });
-        // console.log("token generated",token);
-        res.json({ token });
+
+        const token = jwt.sign({ userId: user.userid, admin: user.admin }, secretKey, { expiresIn: '1h' });
+        res.json({ token, admin: user.admin });
       });
     });
   }

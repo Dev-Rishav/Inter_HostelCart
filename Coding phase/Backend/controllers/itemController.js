@@ -2,6 +2,8 @@ const Item = require('../models/itemModel');
 
 const itemController = {
   getAllItems: (req, res) => {
+    
+    
     Item.getAll((err, result) => {
       if (err) {
         console.error('Error executing query:', err);
@@ -12,6 +14,7 @@ const itemController = {
   },
 
   createItem: (req, res) => {
+    
     const {
       sellerID,
       itemName,
@@ -40,6 +43,7 @@ const itemController = {
   },
 
   getItemsByGenderAndSeller: (req, res) => {
+    
     const { gender, id } = req.params;
     Item.getByGenderAndSeller(gender, id, (err, result) => {
       if (err) {
@@ -65,7 +69,8 @@ const itemController = {
   },
   getItemById:(req,res)=>{
       const id=req.params;
-      // console.log("yes",id);
+
+     // console.log("yes",id);
       
        Item.getById(id.id,(err,result)=>{
         if(err){
@@ -74,7 +79,46 @@ const itemController = {
         }
         res.send(result);
       })
-  }
+  },
+
+  reportItem: (req, res) => {
+    const { itemId } = req.body;
+
+    Item.reportItem(itemId, (err, result) => {
+      if (err) {
+        console.error('Error reporting item:', err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+      res.status(200).json(result);
+    });
+  },
+  removeItem:(req,res)=>{
+    const id=req.params;
+    
+    Item.removeById(id.id,(err,result)=>{
+      if(err){
+        console.error('Error executing query:', err);
+        return res.status(500).json({ error: err.message });
+      }
+      res.status(201).json({ message: 'Item removed successfully'});
+    })
+  },
+  getItemsByHostel:(req,res)=>{
+    
+    const tag=req.params;
+    
+    
+    Item.getByHostel(tag, (err, result) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        return res.status(500).json({ error: err.message });
+      }
+      
+      
+      
+      res.send(result);
+    });
+  },
 };
 
 module.exports = itemController;

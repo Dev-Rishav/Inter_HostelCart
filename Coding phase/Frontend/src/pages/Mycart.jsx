@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { removeItem, clearCart, fetchCartItems } from '../Redux/cartSlice';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const Mycart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector(state => state.cart.cart.items);
   const totalAmount = useSelector(state => state.cart.totalAmount);
   const token = Cookies.get('token');
-  // console.log("cartItenms",cartItems);
   
   useEffect(() => {
     if (token) {
@@ -36,6 +36,10 @@ const Mycart = () => {
 
   const handleClearCart = () => {
     dispatch(clearCart());
+  };
+
+  const handleBuyNow = (itemno) => {
+    navigate('/auction', { state: { itemno } });
   };
 
   if (!token) {
@@ -89,6 +93,13 @@ const Mycart = () => {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 17.94 6M18 18 6.06 6" />
                               </svg>
                               Remove
+                            </button>
+                            <button
+                              type="button"
+                              className="p-2 inline-flex items-center text-sm font-medium text-blue-600 hover:underline border-blue-800 hover:border rounded-md ml-2"
+                              onClick={() => handleBuyNow(item.itemno)}
+                            >
+                              Buy Now
                             </button>
                           </div>
                         </div>

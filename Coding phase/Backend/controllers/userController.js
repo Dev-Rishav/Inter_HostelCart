@@ -46,6 +46,15 @@ const userController = {
       }
       res.json({ message: 'Profile image updated successfully' });
     });
+  },
+  getusers:(req,res)=>{
+    User.getAll((err, result) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        return res.status(500).json({ error: err.message });
+      }
+      res.send(result);
+    });
   }
 };
 

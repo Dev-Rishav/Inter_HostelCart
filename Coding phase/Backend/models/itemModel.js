@@ -14,7 +14,7 @@ const Item = {
     pool.query(sqlSelect, [gender, sellerID], callback);
   },
   getByTag:(tag,callback)=>{
-    const sqlGet="SELECT * FROM item WHERE item.itemtags =$1  ";  //OR gender='he'
+    const sqlGet="SELECT * FROM item WHERE LOWER(item.itemtags) =$1  ";  //OR gender='he'
     
     
     pool.query(sqlGet,[tag.tag],callback);
@@ -35,7 +35,46 @@ const Item = {
   WHERE item.itemno = $1`;
     
     pool.query(query,[id],callback);
-  }
+  },
+  reportItem: (itemId, callback) => {
+    const sqlSelect = "SELECT reportflag FROM item WHERE itemno = $1";
+    pool.query(sqlSelect, [itemId], (err, result) => {
+      if (err) {
+        return callback(err);
+      }
+      
+      if (result.rows.length > 0 && result.rows[0].reportflag) {
+        // console.log("result",result.rows[0].reportflag);
+        return callback(null, { message: 'Item has already been reported' });
+      } else {
+        const sqlUpdate = "UPDATE item SET reportflag = true WHERE itemno = $1";
+        pool.query(sqlUpdate, [itemId], (err, result) => {
+          if (err) {
+            return callback(err);
+          }
+          return callback(null, { message: 'Item reported successfully' });
+          
+        });
+      }
+    });
+  },
+  removeById:(id,callback)=>{
+
+    const query="DELETE FROM item  WHERE itemno = $1 ";
+    pool.query(query,[id],callback);
+  },
+  getByHostel:(tag,callback)=>{
+    const sqlGet = `
+    SELECT item.* 
+    FROM item
+    JOIN usertable ON item.sellerid = usertable.userid
+    WHERE usertable.hostelno = $1;
+  `;
+    
+    pool.query(sqlGet,[tag.hostel],callback);
+  
+    
+  },
 };
 
 module.exports = Item;

@@ -22,7 +22,11 @@ const User = {
   updateProfileImage: (userId, image, callback) => {
     const sqlUpdate = "UPDATE usertable SET profileImage = $1 WHERE userid = $2";
     pool.query(sqlUpdate, [image, userId], callback);
-  }
+  },
+  getAll: (callback) => {
+    const sqlSelect = "SELECT * FROM usertable";
+    pool.query(sqlSelect, callback);
+  },
 };
 
 module.exports = User;

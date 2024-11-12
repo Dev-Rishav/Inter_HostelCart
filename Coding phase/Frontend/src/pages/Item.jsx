@@ -33,8 +33,27 @@ const Item = () => {
     alert('Chat with user say: hii');
   };
 
-  const handleReportClick = () => {
-    alert('this item is reported');
+  const handleReportClick = async () => {
+    if (!token) {
+      alert('Please sign in to report an item.');
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/api/items/report',
+        { itemId: item.itemno },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert(response.data.message);
+    } catch (error) {
+      console.error('Error reporting item:', error);
+      alert('Failed to report item');
+    }
   };
 
   const handleAddToCart = async () => {

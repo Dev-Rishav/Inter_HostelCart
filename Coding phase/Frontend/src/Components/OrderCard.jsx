@@ -4,12 +4,13 @@ import { Button } from '@/Components/ui/button';
 import { ChevronDown } from 'lucide-react';
 
 const OrderCard = ({ order }) => (
+  
   <Card className="mb-4">
     <CardHeader className="flex flex-wrap justify-between items-center">
-      <OrderInfo label="ORDER PLACED" value={order.date} />
-      <OrderInfo label="TOTAL" value={order.total} />
+      <OrderInfo label="ORDER PLACED" value={order.listingdate} />
+      <OrderInfo label="TOTAL" value={order.itemprice} />
       <OrderInfo label="SHIP TO" value={order.shipTo} icon={<ChevronDown />} />
-      <OrderActions orderId={order.id} />
+      <OrderActions orderId={order.itemno} />
     </CardHeader>
   </Card>
 );

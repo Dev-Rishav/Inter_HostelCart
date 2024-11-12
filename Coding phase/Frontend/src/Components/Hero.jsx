@@ -55,11 +55,11 @@ const Hero = () => {
   }, []);
     return (
         <div style={{ backgroundImage: `url(${manit})`}} className=" w-[1516px] h-[500px] m-auto mt-8 bg-stone-200 rounded-xl" >
-            <div className="w-full h-full flex justify-center items-center ml-96">
-                <div className="w-full 2xl:w-1/2 p-5 space-y-5">
+            <div className="w-full h-full flex justify-center items-center ml-72">
+                <div className="w-full 2xl:w-1/2 p-5 space-y-2">
                     <h1 className="text-center text-5xl font-semibold">
                        
-                        <span ref={textRef} className="inline-block text-black text-3xl">
+                        <span ref={textRef} className="inline-block text-black text-4xl">
                              {" Find everything you need from fellow hostelers".split("").map((letter, index) => (
                             <span key={index} className="letter inline-block">
                                 {letter === " " ? "\u00A0" : letter}

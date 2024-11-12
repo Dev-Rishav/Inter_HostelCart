@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import orders from '../json/orders.js'; 
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 // Simplified component implementations
 const Card = ({ children, className }) => (
@@ -59,45 +61,42 @@ const ChevronDown = () => <span>▼</span>;
 const ArrowLeft = () => <span>←</span>;
 const Search = () => <span>🔍</span>;
 
-
-
 const OrderCard = ({ order }) => (
   <Card className="mb-4">
     <CardHeader className="flex flex-wrap justify-between items-center">
       <div className="mb-2 sm:mb-0">
         <p className="text-sm text-gray-500">ORDER PLACED</p>
-        <p className="font-semibold">{order.date}</p>
+        <p className="font-semibold">{order.listingdate}</p>
       </div>
       <div className="mb-2 sm:mb-0">
         <p className="text-sm text-gray-500">TOTAL</p>
-        <p className="font-semibold">{order.total}</p>
+        <p className="font-semibold">{order.itemprice}</p>
       </div>
       <div className="mb-2 sm:mb-0">
         <p className="text-sm text-gray-500">BOUGHT FROM</p>
         <p className="font-semibold flex items-center">
-          {order.boughtFrom} <ChevronDown />
+          {order.username} <ChevronDown />
         </p>
       </div>
       <div className="text-right">
-        <p className="text-sm text-gray-500">ORDER # {order.id}</p>
+        <p className="text-sm text-gray-500">ORDER # {order.itemno}</p>
         <Button variant="link" className="p-0">View order details</Button>
       </div>
     </CardHeader>
     <CardContent className="flex flex-wrap items-start">
       <img
-        src={order.image}
+        src={order.itemphotourl}
         alt={order.productName}
         className="w-24 h-24 object-cover rounded-md mb-4 sm:mb-0 sm:mr-4"
       />
       <div className="flex-grow mb-4 sm:mb-0">
-        <h3 className="font-semibold">{order.productName}</h3>
+        <h3 className="font-semibold">{order.itemname}</h3>
         <p className="text-sm text-gray-500 mt-1">Return eligibility: <ChevronDown /></p>
         <div className="flex mt-4 space-x-2">
-          <Button>View your item</Button>
+          <Link to={`/item/${order.itemno}`} ><Button>View your item</Button></Link>
           <Button variant="outline">Sell it again</Button>
         </div>
       </div>
-  
     </CardContent>
   </Card>
 );
@@ -105,12 +104,46 @@ const OrderCard = ({ order }) => (
 const Orders = () => {
   const [selectedTab, setSelectedTab] = useState('orders');
   const [selectedYear, setSelectedYear] = useState('2023');
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = Cookies.get('token');
+        const response = await axios.get('http://localhost:3001/api/orders', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setOrders(response.data.orders);        
+        setLoading(false);
+        console.log("orders",orders);
+
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+        setError('Failed to fetch orders');
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   const tabs = [
     { id: 'orders', label: 'Orders' },
     { id: 'cancelledOrders', label: 'Cancelled Orders' },
     { id: 'reportedOrders', label: 'Reported Orders' },
   ];
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -159,7 +192,7 @@ const Orders = () => {
         </div>
 
         {orders.map((order) => (
-          <OrderCard key={order.id} order={order} />
+          <OrderCard key={order.itemno} order={order} />
         ))}
       </div>
     </div>

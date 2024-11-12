@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { storage } from '../Firebase/setup'; 
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import Cookies from 'js-cookie';
 
 const AddItem = () => {
+  const [userid, setUserid] = useState('');
   const [formData, setFormData] = useState({
-    sellerID: 1, // TODO: Fetch the current user's ID
+    sellerID: '', // This will be set after fetching the user ID
     itemName: '',
     itemPrice: '',
     itemDescription: '',
@@ -16,6 +18,28 @@ const AddItem = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = Cookies.get('token');
+        const response = await axios.get('http://localhost:3001/api/user/profile', {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        setUserid(response.data.user.userid);
+        setFormData((prevData) => ({
+          ...prevData,
+          sellerID: response.data.user.userid
+        }));
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,7 +93,7 @@ const AddItem = () => {
 
       setSuccess('Item added successfully');
       setFormData({
-        sellerID: 1,
+        sellerID: userid,
         itemName: '',
         itemPrice: '',
         itemDescription: '',
@@ -120,13 +144,22 @@ const AddItem = () => {
       </div>
       <div className="mb-4">
         <label className="block text-sm">Item Tags</label>
-        <input
-          type="text"
+        <select
+          id="options"
           name="itemTags"
           value={formData.itemTags}
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded-lg"
-        />
+        >
+          <option value="">Select a tag</option>
+          <option value="clothing">Clothings</option>
+          <option value="electronics">Electronics</option>
+          <option value="stationary">Stationary</option>
+          <option value="vehicle">Vehicle</option>
+          <option value="sport">Sport</option>
+          <option value="medicine">Medicine</option>
+          <option value="accessories">Accessories</option>
+        </select>
       </div>
       <div className="mb-4">
         <label className="block text-sm">Item Photo</label>

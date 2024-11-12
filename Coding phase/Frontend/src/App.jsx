@@ -1,9 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Layout from './Components/Layout'; 
 import UnifiedSection from './Components/UnifiedSection';
-import MenBannerlist from './json/mensItems';
-import WomenBannerlist from './json/womensItems';
 import Payment from './Components/Payment'
 import Home from './pages/Home'; 
 import MyShop from './pages/MyShop'; 
@@ -17,7 +15,14 @@ import Mycart from './pages/Mycart';
 import Item from './pages/Item';
 import AdminDashboard from './pages/AdminDashboard';
 import './index.css';
+import Auction from './pages/Auction';
+import Myitem from './Components/Myitem';
+import Hostelitem from './pages/Hostelitem';
+
 function App() {
+
+
+
   return (
     
     <Router>
@@ -43,6 +48,9 @@ function App() {
           <Route path="/mycart" element={<Mycart />} />
           <Route path="/item/:itemid" element={<Item />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/auction" element={<Auction />} />
+          <Route path="/myitem" element={<Myitem />} />
+          <Route path="/hostel/:hostelno" element={<Hostelitem />} />
         </Routes>
       </Layout>
     </Router>

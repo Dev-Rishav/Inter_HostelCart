@@ -6,29 +6,38 @@ const authRoutes = require('./routes/authRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const userRoutes = require('./routes/userRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const chatRoutes = require('./routes/chatRoutes');
+const auctionRoutes = require('./routes/auctionRoutes');
+const hostelRoutes = require('./routes/hostelRoutes');
+
 const { Server } = require('socket.io');
 
 const app = express();
 const server = require('http').createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3001', // Replace with your frontend's origin
+    origin: 'http://localhost:5173', // Replace with your frontend's origin
     methods: ['GET', 'POST']
   }
 });
 
-//* Middleware
+// Middleware
 app.use(cors({
   origin: 'http://localhost:5173'
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//* Routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
-app.use("/api/user",userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/hostel',hostelRoutes);
+app.use('/api/auctions', auctionRoutes(io)); // Pass io instance to auction routes
 
 app.get('/', (req, res) => {
   res.send('From backend');
@@ -47,20 +56,19 @@ io.on('connection', (socket) => {
     io.to(message.room).emit('receiveMessage', message);
   });
 
+  socket.on('joinAuction', (auctionId) => {
+    socket.join(auctionId);
+    console.log(`User ${socket.id} joined auction ${auctionId}`);
+  });
+
   socket.on('disconnect', () => {
     console.log('A user disconnected:', socket.id);
   });
 });
 
-
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-
-//TODO[DONE]MVC
-//TODO API enpoint for admin panel
-//TODO userSchema updation for admin panel
-//TODO dp attribute for userSchema
-//TODO user cart control
+module.exports = io; // Export io for use in other files

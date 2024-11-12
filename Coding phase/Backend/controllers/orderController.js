@@ -2,21 +2,32 @@ const Order = require('../models/orderModel');
 
 const orderController = {
   createOrder: (req, res) => {
-    const userId = req.user.userId;
-    const { items, totalAmount } = req.body;
+    const { auctionId } = req.body;
 
-    Order.create(userId, items, totalAmount, (err, result) => {
+    Auction.getHighestBid(auctionId, (err, result) => {
       if (err) {
-        console.error('Error creating order:', err);
+        console.error('Error fetching highest bid:', err);
         return res.status(500).json({ error: 'Internal server error' });
       }
-      res.status(201).json({ message: 'Order created successfully', order: result.rows[0] });
+
+      const highestBid = result.rows[0];
+      if (!highestBid) {
+        return res.status(400).json({ error: 'No bids placed on this auction' });
+      }
+
+      Order.create(highestBid.userId, highestBid.itemId, (err, result) => {
+        if (err) {
+          console.error('Error creating order:', err);
+          return res.status(500).json({ error: 'Internal server error' });
+        }
+        res.status(201).json({ message: 'Order created successfully', order: result.rows[0] });
+      });
     });
   },
 
   getUserOrders: (req, res) => {
     const userId = req.user.userId;
-
+    
     Order.findByUserId(userId, (err, result) => {
       if (err) {
         console.error('Error retrieving orders:', err);

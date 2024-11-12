@@ -1,5 +1,6 @@
 const Auction = require("../models/auctionModel");
 const Order = require("../models/orderModel");
+const pool = require('../config/db');
 
 const auctionController = (io) => ({
   createAuction: (req, res) => {
@@ -71,9 +72,6 @@ const auctionController = (io) => ({
   },
 
   stopAuction: (req, res) => {
-    // console.log("njabfjasdadjkasd");
-    // console.log(req.body);
-
     const { auctionId } = req.body;
 
     Auction.stopAuction(auctionId, (err, result) => {
@@ -89,15 +87,13 @@ const auctionController = (io) => ({
         }
 
         const highestBid = result.rows[0];
-        console.log(result.rows[0],"highestBid");
-                
         if (!highestBid) {
           return res
             .status(400)
             .json({ error: "No bids placed on this auction" });
         }
 
-        Order.create(highestBid.sellerid,highestBid.userid, highestBid.itemno,highestBid.bidamount, (err, result) => {
+        Order.create(highestBid.sellerid, highestBid.userid, highestBid.itemno, highestBid.bidamount, (err, result) => {
           if (err) {
             console.error("Error creating order:", err);
             return res.status(500).json({ error: "Internal server error" });
@@ -127,6 +123,81 @@ const auctionController = (io) => ({
       res.json({ auctionId: result.rows[0].auctionid });
     });
   },
+
+  finalizeAuction: (req, res) => {
+    const { auctionId } = req.params;
+
+    pool.connect((err, client, done) => {
+      if (err) throw err;
+
+      const shouldAbort = (err) => {
+        if (err) {
+          client.query('ROLLBACK', (err) => {
+            if (err) {
+              console.error('Error rolling back client', err.stack);
+            }
+            done();
+          });
+          res.status(500).json({ error: "Internal server error" });
+        }
+        return !!err;
+      };
+
+      client.query('BEGIN', (err) => {
+        if (shouldAbort(err)) return;
+
+        client.query('LOCK TABLE auctions, item IN EXCLUSIVE MODE', (err) => {
+          if (shouldAbort(err)) return;
+
+          Auction.getHighestBid(auctionId, (err, result) => {
+            if (shouldAbort(err)) return;
+
+            const highestBid = result.rows[0];
+            if (!highestBid) {
+              client.query('ROLLBACK', (err) => {
+                if (err) {
+                  console.error('Error rolling back client', err.stack);
+                }
+                done();
+              });
+              return res.status(404).json({ error: "No bids found for this auction" });
+            }
+
+            const { userId, bidAmount } = highestBid;
+            const orderDetails = {
+              auctionId,
+              userId,
+              bidAmount,
+              itemId: highestBid.itemno,
+              sellerId: highestBid.sellerid
+            };
+
+            Order.createOrder(orderDetails, (err, orderResult) => {
+              if (shouldAbort(err)) return;
+
+              Auction.stopAuction(auctionId, (err, stopResult) => {
+                if (shouldAbort(err)) return;
+
+                client.query('COMMIT', (err) => {
+                  if (err) {
+                    console.error('Error committing transaction', err.stack);
+                    res.status(500).json({ error: "Internal server error" });
+                  } else {
+                    res.status(200).json({
+                      message: "Auction finalized and order placed successfully",
+                      order: orderResult.rows[0],
+                      auction: stopResult.rows[0]
+                    });
+                  }
+                  done();
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  }
 });
 
 module.exports = auctionController;

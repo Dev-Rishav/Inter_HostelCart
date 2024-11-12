@@ -1,17 +1,41 @@
 import React from 'react';
 import { Search, ShoppingCart, ChevronDown } from 'lucide-react';
-import  { useState } from 'react';
+import  { useState ,useEffect} from 'react';
 import { NavLink,Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
+import jwt_decode from 'jwt-decode';           
+import io from 'socket.io-client';
 
 const Navbar = () => {
 
     const totalAmount = useSelector(state => state.cart.totalAmount);
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
-  const token = Cookies.get("token");
+    const token = Cookies.get("token");
+
+    const socket = io('http://localhost:3001');  
+
+    useEffect(() => {
+      // Decode token and extract userId
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.userId;
+  
+      // Send userId after decoding the token
+      socket.emit('user_connected', { userId, token });
+  
+      // Listen for the username from the server
+      socket.on('username', (data) => {
+        setUsername(data.username);
+        console.log("Fetched Username: ", data.username);  
+      });
+  
+      return () => {
+        socket.off('username');
+      };
+    }, [token]);
+  
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);

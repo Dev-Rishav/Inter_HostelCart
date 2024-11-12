@@ -8,12 +8,15 @@ const userRoutes = require('./routes/userRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const { Server } = require('socket.io');
 
+const User = require('./models/userModel'); 
+
 const app = express();
 const server = require('http').createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3001', // Replace with your frontend's origin
-    methods: ['GET', 'POST']
+    origin: 'http://localhost:5173', // Replace with your frontend's origin
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'] 
   }
 });
 
@@ -37,6 +40,25 @@ app.get('/', (req, res) => {
 // WebSocket connection
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
+
+   // Listen for user connection with userId
+   socket.on('user_connected', ({ userId, token }) => {
+    console.log(`User connected: ${userId}, token: ${token}`);
+
+    // Fetch username from the database using userId
+    User.findById(userId, (err, user) => {
+      if (err) {
+        console.error("Error fetching user:", err);
+        return;
+      }
+      if (user) {
+        // Emit the username back to the frontend
+        socket.emit('username', { username: user.username });
+        console.log('Username sent:', user.username);
+      }
+    });
+  });
+
 
   socket.on('joinRoom', (room) => {
     socket.join(room);

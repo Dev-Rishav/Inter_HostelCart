@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const Myitem = () => {
@@ -7,6 +8,7 @@ const Myitem = () => {
   const [userid, setUserid] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -64,6 +66,10 @@ const Myitem = () => {
     }
   };
 
+  const goToAuction = (itemno) => {
+    navigate('/auction', { state: { itemno } });
+  };
+
   if (loading) {
     return <div className="text-center m-32 text-2xl">Loading...</div>;
   }
@@ -85,7 +91,10 @@ const Myitem = () => {
             <p className="text-lg font-medium text-gray-700">{item.itemname}</p>
             <p className="text-lg font-medium text-gray-700">MRP: {item.itemprice}</p>
             <p className="text-lg font-medium text-gray-700">{item.itemdescription}</p>
-            <button onClick={() => remove(item.itemno)} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none transition duration-200">Remove</button>
+            <div className="flex space-x-2">
+              <button onClick={() => remove(item.itemno)} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none transition duration-200">Remove</button>
+              <button onClick={() => goToAuction(item.itemno)} className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none transition duration-200">Go to Your Auction</button>
+            </div>
           </li>
         ))}
       </ul>

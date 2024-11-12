@@ -39,7 +39,7 @@ const Auction = () => {
 
     fetchProfile();
   }, [token]);
-  
+
   useEffect(() => {
     const fetchAuction = async (auctionId) => {
       try {
@@ -61,9 +61,19 @@ const Auction = () => {
 
     const createAuction = async () => {
       try {
+        // Fetch item details to get the item price
+        const itemResponse = await axios.get(`http://localhost:3001/api/items/great/atul/${itemno}`);
+        const item = itemResponse.data.rows[0];
+        // console.log(item.data,"yes");
+        const startingBid = item.itemprice;
+        const endTime = new Date();
+        endTime.setDate(endTime.getDate() + 7); // Set end time to 7 days from now
+        console.log(endTime);
+        
+
         const response = await axios.post(
           'http://localhost:3001/api/auctions/create',
-          { itemId: itemno, startingBid: 100, endTime: '2023-12-31 23:59:59' }, // Replace with actual starting bid and end time
+          { itemId: itemno, startingBid, endTime: endTime.toISOString() },
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -117,10 +127,36 @@ const Auction = () => {
       setBids((prevBids) => [bid, ...prevBids]);
     });
 
+    socket.on('auctionEnded', (data) => {
+      if (data.winnerId !== userId) {
+        alert('The auction has ended.');
+        navigate('/');
+      }
+    });
+
     return () => {
       socket.off('newBid');
+      socket.off('auctionEnded');
     };
-  }, [itemno, token, userId]);
+  }, [itemno, token, userId, navigate]);
+
+  useEffect(() => {
+    const checkAuctionEnd = async () => {
+      if (auction.endtime && new Date(auction.endtime) < new Date()) {
+        const highestBid = bids[0];
+        if (highestBid) {
+          if (highestBid.userid === userId) {
+            alert(`Congratulations! You won the auction with a bid of ₹${highestBid.bidamount}`);
+            navigate('/orders', { state: { itemno, bidAmount: highestBid.bidamount } });
+          } else {
+            socket.emit('auctionEnded', { winnerId: highestBid.userid });
+          }
+        }
+      }
+    };
+
+    checkAuctionEnd();
+  }, [auction, bids, userId, navigate, itemno]);
 
   const handleBid = async () => {
     if (!token) {

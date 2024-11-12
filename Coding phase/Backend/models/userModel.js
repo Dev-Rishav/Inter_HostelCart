@@ -15,6 +15,10 @@ const User = {
     const sqlSelect = "SELECT * FROM usertable WHERE userid = $1";
     pool.query(sqlSelect, [userId], callback);
   },
+  findBySellerId: (userId, callback) => {
+    const query = 'SELECT hostelno FROM usertable WHERE userid = $1';  
+    pool.query(query, [userId], callback); 
+  },
   updateMobileNumber: (userId, mobileNumber, callback) => {
     const sqlUpdate = "UPDATE usertable SET userphoneno = $1 WHERE userid = $2";
     pool.query(sqlUpdate, [mobileNumber, userId], callback);

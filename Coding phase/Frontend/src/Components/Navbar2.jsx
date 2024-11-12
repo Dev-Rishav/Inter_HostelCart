@@ -12,41 +12,41 @@ const Navbar = () => {
 
     const totalAmount = useSelector(state => state.cart.totalAmount);
     const [showMenu, setShowMenu] = useState(false);
-    const [username, setUsername] = useState('');
+  //  const [username, setUsername] = useState('');
     const navigate = useNavigate();
     const token = Cookies.get("token");
 
-    const socket = io('http://localhost:3001');    
-    useEffect(() => {
-      if (token) {
-          try {
-              // Decode token to get userId
-              const decodedToken = jwt_decode(token);
-              const userId = decodedToken.userId;
+  //   const socket = io('http://localhost:3001');    
+  //   useEffect(() => {
+  //     if (token) {
+  //         try {
+  //             // Decode token to get userId
+  //             const decodedToken = jwt_decode(token);
+  //             const userId = decodedToken.userId;
               
-              socket.connect();
+  //             socket.connect();
               
-              // Emit the userId to the server
-              socket.emit('user_connected', { userId });
+  //             // Emit the userId to the server
+  //             socket.emit('user_connected', { userId });
               
-              // Listen for the username from the server
-              socket.on('username', (data) => {
-                  setUsername(data.username);
-                  console.log("Fetched Username: ", data.username);  
-              });
-          } catch (error) {
-              console.error("Invalid token:", error);
-              Cookies.remove("token");
-              navigate("/login");
-          }
-      }
+  //             // Listen for the username from the server
+  //             socket.on('username', (data) => {
+  //                 setUsername(data.username);
+  //                 console.log("Fetched Username: ", data.username);  
+  //             });
+  //         } catch (error) {
+  //             console.error("Invalid token:", error);
+  //             Cookies.remove("token");
+  //             navigate("/login");
+  //         }
+  //     }
 
-      // Clean up when component unmounts or token changes
-      return () => {
-          socket.off('username');
-          socket.disconnect();
-      };
-  }); 
+  //     // Clean up when component unmounts or token changes
+  //     return () => {
+  //         socket.off('username');
+  //         socket.disconnect();
+  //     };
+  // }); 
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);

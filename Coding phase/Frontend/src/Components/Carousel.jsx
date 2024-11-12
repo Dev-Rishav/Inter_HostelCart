@@ -1,52 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import Slider from 'react-slick';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; 
 
-const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const PrevArrow = ({ onClick }) => (
+  <div
+    className="absolute left-0 top-1/2 transform -translate-y-1/2 cursor-pointer text-white z-10"
+    onClick={onClick}
+  >
+    <FaArrowLeft size={30} style={{ color: 'black'}}/>
+  </div>
+);
 
-  // Array of image URLs
-  const images = [
-    "https://mdbcdn.b-cdn.net/img/new/slides/041.webp",
-    "https://mdbcdn.b-cdn.net/img/new/slides/042.webp",
-    "https://mdbcdn.b-cdn.net/img/new/slides/043.webp",
-  ];
+const NextArrow = ({ onClick }) => (
+  <div
+    className="absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer text-white z-10"
+    onClick={onClick}
+  >
+    <FaArrowRight size={30} style={{ color: 'black'}}/>
+  </div>
+);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Change to the next image every 3 seconds
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-
-    return () => clearInterval(interval); // Clean up on component unmount
-  }, [images.length]);
+const Carousel = ({ images =[]}) => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+  };
 
   return (
-    <div className="relative w-full max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg">
-      <div className="carousel">
+    <div className="relative mt-6">
+      <Slider {...settings}>
         {images.map((image, index) => (
-          <div
-            key={index}
-            className={`carousel-item w-full ${
-              index === currentIndex ? "block" : "hidden"
-            }`}
-          >
-            <img src={image} alt={`Slide ${index + 1}`} className="w-full" />
+          <div key={index} className="px-6">
+            <img src={image} alt={`Slide ${index}`} className="w-[500px] h-[250px] object-cover rounded-lg" />
           </div>
         ))}
-      </div>
-
-      {/* Optional Dots for navigation */}
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-        {images.map((_, index) => (
-          <span
-            key={index}
-            className={`h-2 w-2 rounded-full ${
-              index === currentIndex ? "bg-blue-500" : "bg-gray-300"
-            }`}
-          ></span>
-        ))}
-      </div>
+      </Slider>
     </div>
   );
 };
 
 export default Carousel;
+

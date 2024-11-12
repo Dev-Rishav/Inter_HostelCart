@@ -1,8 +1,6 @@
 import React, { useEffect, useRef,useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-import Carousel from "./Carousel"
 import { gsap } from "gsap";
-
 
 const Hero = () => {
     const textRef = useRef(null);
@@ -91,7 +89,6 @@ const Hero = () => {
                     </div>
 
                 </div>
-                <Carousel/>
             </div>
         </div>
     )

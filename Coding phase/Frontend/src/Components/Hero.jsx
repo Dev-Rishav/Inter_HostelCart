@@ -3,6 +3,8 @@ import Carousel from "./Carousel"
 import { gsap } from "gsap";
 import {getItems } from '../api';
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
+import axios from 'axios';
 const Hero = () => {
     const textRef = useRef(null);
 
@@ -23,7 +25,38 @@ const Hero = () => {
   }, []);
 
   const [items, setItems] = useState([]);
+  const [userid, setUserid] = useState('');
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = Cookies.get('token');
+      if (!token) {
+        setError('Please sign in to view your added items');
+        setLoading(false);
+        return;
+      }
 
+      try {
+        const response = await axios.get('http://localhost:3001/api/user/profile', {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        setUserid(response.data.user.userid);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        setError('Failed to fetch user profile');
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  // useEffect(() => {
+  //   if (userid) {
+  //     fetchItems();
+  //   }
+  // }, [userid]);
   useEffect(() => {
       const fetchItems= async ()=>{
           try{
@@ -47,7 +80,7 @@ const Hero = () => {
   const placeholderRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
   const filteredItems = items.filter(item =>
-    item.itemname.toLowerCase().includes(searchQuery.toLowerCase())
+    item.itemname.toLowerCase().includes(searchQuery.toLowerCase()) && (item.sellerid != userid)
   );
   useEffect(() => {
     // Animation for the search bar

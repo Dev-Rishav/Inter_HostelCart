@@ -9,16 +9,37 @@ const socket = io('http://localhost:3001'); // Replace with your backend's URL
 const Auction = () => {
   const location = useLocation();
   const { itemno } = location.state || {};
-  console.log(itemno);
   
   const navigate = useNavigate();
   const [auction, setAuction] = useState({});
   const [bids, setBids] = useState([]);
   const [bidAmount, setBidAmount] = useState('');
   const [isSeller, setIsSeller] = useState(false);
+  const [userId, setUserId] = useState(null);
   const token = Cookies.get('token');
-  const userId = 2; // Replace with actual user ID
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!token) {
+        console.error('Please sign in to view your added items');
+        return;
+      }
+
+      try {
+        const response = await axios.get('http://localhost:3001/api/user/profile', {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        setUserId(response.data.user.userid);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+
+    fetchProfile();
+  }, [token]);
+  
   useEffect(() => {
     const fetchAuction = async (auctionId) => {
       try {
@@ -77,8 +98,6 @@ const Auction = () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/items/great/atul/${itemno}`);
         const item = response.data.rows[0];
-        // console.log(response.data.rows[0], "item");
-
         if (item && item.sellerid === userId) {
           setIsSeller(true);
         } else {
@@ -89,8 +108,10 @@ const Auction = () => {
       }
     };
 
-    fetchAuctionId();
-    checkIfSeller();
+    if (userId) {
+      fetchAuctionId();
+      checkIfSeller();
+    }
 
     socket.on('newBid', (bid) => {
       setBids((prevBids) => [bid, ...prevBids]);

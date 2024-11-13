@@ -8,7 +8,7 @@ const Hostelitem = () => {
     const navigate = useNavigate();
     const fetchItems = async () => {
         try {
-          const response = await axios.get(`http://localhost:3001/api/items/hostel/item/${hostelno}`);
+          const response = await axios.get(`http://localhost:3001/api/hostel/${hostelno}`);
           const allItems = response.data.rows || [];
           //const myItems = allItems.filter(item => item.sellerid === userid);
           setItems(allItems);

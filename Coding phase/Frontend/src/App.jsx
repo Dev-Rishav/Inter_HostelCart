@@ -14,6 +14,7 @@ import Signup from './Components/Signup';
 import Mycart from './pages/Mycart';
 import Item from './pages/Item';
 import AdminDashboard from './pages/AdminDashboard';
+import './index.css';
 import Auction from './pages/Auction';
 import Myitem from './Components/Myitem';
 import Hostelitem from './pages/Hostelitem';
@@ -23,6 +24,7 @@ function App() {
 
 
   return (
+    
     <Router>
       <Layout>
         <Routes>

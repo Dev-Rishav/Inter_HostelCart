@@ -1,10 +1,11 @@
 import React, { useEffect, useRef,useState } from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
 import Carousel from "./Carousel"
 import { gsap } from "gsap";
-import {getItems } from '../api';
-import { useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie';
-import axios from 'axios';
+import manit from "../assets/Manit1.png"
+import { FaArrowRight } from 'react-icons/fa'
+
+
 const Hero = () => {
     const textRef = useRef(null);
 
@@ -24,64 +25,12 @@ const Hero = () => {
     );
   }, []);
 
-  const [items, setItems] = useState([]);
-  const [userid, setUserid] = useState('');
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const token = Cookies.get('token');
-      if (!token) {
-        setError('Please sign in to view your added items');
-        setLoading(false);
-        return;
-      }
+                                                       //search bar
 
-      try {
-        const response = await axios.get('http://localhost:3001/api/user/profile', {
-          headers: {
-            authorization: `Bearer ${token}`
-          }
-        });
-        setUserid(response.data.user.userid);
-      } catch (error) {
-        console.error('Error fetching user:', error);
-        setError('Failed to fetch user profile');
-        setLoading(false);
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
-  // useEffect(() => {
-  //   if (userid) {
-  //     fetchItems();
-  //   }
-  // }, [userid]);
-  useEffect(() => {
-      const fetchItems= async ()=>{
-          try{
-              const data=await getItems();
-              // console.log(data);
-              setItems(data);
-          }
-          catch(error){
-              console.error('Error fetching items:', error);
-              throw error;
-          }
-  }
-
-  fetchItems();
-  },[]);                                                  
-  const navigate = useNavigate();
-  const handleDivClick = (itemid) => {
-    navigate(`/item/${itemid}`); // Navigate to (`/other/${userId}`); route
-  };
   const searchRef = useRef(null);
   const placeholderRef = useRef(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const filteredItems = items.filter(item =>
-    item.itemname.toLowerCase().includes(searchQuery.toLowerCase()) && (item.sellerid != userid)
-  );
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     // Animation for the search bar
     gsap.fromTo(
@@ -105,14 +54,13 @@ const Hero = () => {
     );
   }, []);
     return (
-      <div>
-        <div className="w-11/12 xl:w-4/5 h-[350px] m-auto mt-8 bg-stone-200 rounded-xl" >
-            <div className="w-full h-full flex justify-center items-center">
-                <div className="w-11/12 xl:w-1/2 p-5 space-y-5">
-                    <h1 className="text-5xl font-semibold">
+        <div style={{ backgroundImage: `url(${manit})`}} className=" w-[1516px] h-[500px] m-auto mt-8 bg-stone-200 rounded-xl" >
+            <div className="w-full h-full flex justify-center items-center ml-72">
+                <div className="w-full 2xl:w-1/2 p-5 space-y-2">
+                    <h1 className="text-center text-5xl font-semibold">
                        
-                        <span ref={textRef} className="inline-block">
-                             {"Find the Perfect Product  Online".split("").map((letter, index) => (
+                        <span ref={textRef} className="inline-block text-black text-4xl">
+                             {" Find everything you need from fellow hostelers".split("").map((letter, index) => (
                             <span key={index} className="letter inline-block">
                                 {letter === " " ? "\u00A0" : letter}
                             </span>
@@ -123,49 +71,37 @@ const Hero = () => {
                         <AiOutlineSearch size={"1.2rem"} />
                         <input type="text" placeholder="Search..." className="outline-0 w-full" />
                     </div> */}
-                    <div  className="mb-4 ">
-                        <h1 className="text-4xl font-bold text-red-500 mb-2">
-                            <span ref={placeholderRef} className="inline-block">
-                                {"Search...".split("").map((letter, index) => (
+                    <div  className="m-8">
+                    <h1 className="text-2xl font-bold text-red-500 mb-2 ">
+                      <span ref={placeholderRef} className="inline-block">
+                        <div className="flex items-center group">
+                          <button className="bg-red-900 h-[40px] text-white ml-52 px-2 py-2 flex items-center space-x-2"> 
+                            <span>Explore Items</span>
+                            <FaArrowRight className="inline-block group-hover:translate-x-2 duration-200 text-base h-[20px] w-[20px] bg-red-900 text-white" />
+                          </button>
+                        </div>
+                      </span>
+                    </h1>
+
+                         {/* {"Search...".split("").map((letter, index) => (
                                 <span key={index} className="letter inline-block">
                                     {letter === " " ? "\u00A0" : letter}
                                 </span>
-                                ))}
-                            </span>
-                        </h1>
-
+                                ))} */}
                         {/* Search Input Field */}
-                        <input
+                        {/* <input
                             type="text"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                             placeholder="Type your search here..."
                             className=" px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-800"
-                        />
+                        /> */}
+                        
                     </div>
 
                 </div>
                 <Carousel/>
             </div>
-            
-        </div>
-        <div className='w-5/6 m-auto space-y-10 mt-12'>
-            
-            <h1 className='text-2xl font-semibold text-center'>Products</h1>
-            <div className='products grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 -content-center bg-gray-100 p-8 rounded-2xl shadow-lg '>
-                {filteredItems.length>0?(
-                  filteredItems.map(item => (
-                    <div key={item.itemno} className='product h-[350px] space-y-2 cursor-pointer rounded-xl shadow-2xl p-4 overflow-hidden transform transition duration-500 hover:scale-105'  onClick={() => handleDivClick(item.itemno)}>
-                        <img className='w-full h-4/5 object-cover' loading='lazy' src={item.itemphotourl} alt={item.itemname} />
-                        <p className='font-semibold text-gray-600'>{item.itemname}</p>
-                        <h1 className='text-xl font-semibold'>₹{item.itemprice}</h1>
-                    </div>
-                ))
-                ):(
-                  <h1 className='text-2xl font-semibold text-center'>NO Products Found</h1>
-                )}
-            </div>
-        </div>
         </div>
     )
 };

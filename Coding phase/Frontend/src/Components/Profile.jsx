@@ -78,21 +78,21 @@ const Profile = () => {
   }
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg max-w-lg mx-auto mt-10">
+    <div className="p-6 bg-yellow-50 rounded-lg shadow-lg max-w-lg mx-auto mt-10">
       <h2 className="text-3xl font-semibold mb-6 text-center">Profile</h2>
       <div className="flex flex-col items-center mb-6">
         <div className="relative mb-4">
           <img
             src={profileImage}
             alt="Profile"
-            className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
+            className="w-52 h-52 rounded-full object-cover border-4 border-gray-700"
           />
-          <label className="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer flex items-center justify-center">
+          <label className="absolute bottom-0 right-0 bg-gray-700 text-white  p-2 rounded-full cursor-pointer flex items-center justify-center">
             <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
             <FaCamera size={20} />
           </label>
         </div>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold">Edit Image</button>
+        <button className="bg-gray-700 text-white px-4 py-2 rounded-lg font-semibold">Edit Image</button>
       </div>
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">Email</label>
@@ -121,7 +121,7 @@ const Profile = () => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
-      <button onClick={handleSaveChanges} className="bg-blue-900 text-white px-6 py-2 rounded-lg font-semibold w-full">Save Changes</button>
+      <button onClick={handleSaveChanges} className="bg-blue-950 text-white px-6 py-2 rounded-lg font-semibold w-full">Save Changes</button>
     </div>
   );
 };

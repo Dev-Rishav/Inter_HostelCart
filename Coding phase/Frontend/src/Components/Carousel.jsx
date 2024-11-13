@@ -12,7 +12,7 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Array of image URLs
-  const images = [(h1),(h2),(h4),(h6),(h7),(h8),(h9),(h10),(h12)];
+  const images = [];
 
   useEffect(() => {
     const interval = setInterval(() => {
